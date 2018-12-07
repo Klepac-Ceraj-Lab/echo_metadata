@@ -2,13 +2,18 @@
 
 ## Notes
 
+- editing on AirTable
 - export as UTF8 CSV
+  - replace previous csv file in repo
 - in atom, find/replace `\r\n` with `\n` (using regular expressions - the `.*` button)
+  - doesn't seem to be a problem with AirTable
 - sort by DOC, then SubjectID
+- commit to GitHub at least once a week
+- upload copy to ntm at least once a month
 
 ## Column Headers
 
-- SampleID: unique ID associated with that specific sample, created by Sophie in the following form
+- SampleID: unique ID associated with that specific sample, created by Sophie in the following form (N.B. may begin using alternate format when submitting to IMR in order to not include any metadata in sample name)
     - Mother_Child: M or C (M = mother, C = child)
     - SubjectID: #### specific to patient (see also MaternalID)
     - TimePoint: # converted from alphabetical (i.e. 1=A, 2=B, 3=C) to match main FileMakerPro database and not fecal sample label
@@ -32,4 +37,7 @@
 - Mgx_processed and 16S_processed:
     - Y = sent and sequenced
     - N = sent, not yet sequenced
-- Notes: miscelaneous comments on that sample 
+    - changed to "Sequenced" and "Sent" in AirTable
+- Mgx_batch: dictates which batch sample was sequenced in, batch is defined by separate 96-well plates
+- Notes: miscellaneous comments on that sample
+- Discrepancies: connects to separate table on AirTable, documents samples with identical SampleIDs or other questions/mistakes in the record accumulated through processing
