@@ -19,7 +19,9 @@
     - TimePoint: # converted from alphabetical (i.e. 1=A, 2=B, 3=C) to match main FileMakerPro database and not fecal sample label
     - Fecal_EtOH: F or E (F = fecal or Genotek collection tubes, E = ethanol collection tubes)
 - MaternalID: usually identical to SubjectID, except in case of multiple births (i.e. twins, triplets) where the numerically first ID is chosen
-- CollectionRep: 1 or 2, replicates of one stool sample collected in a separate collection tubes
+- CollectionRep: 1 or 2 (usually), multiple fecal samples collected for the same TimePoint, generally only one replicate is processed
+    - Assume biological replicates if DOC is the same (unless otherwise noted), i.e. replicates of one stool sample collected in a separate collection tubes
+    - Changed as of 1/15/19
 - DOC: Date of collection
 - DOF: Date of freeze, when moved to -80 freezer in Providence
 - Date_Shipped: Date picked up from Providence
