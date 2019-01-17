@@ -10,6 +10,9 @@
 - sort by DOC, then SubjectID
 - commit to GitHub at least once a week
 - upload copy to ntm at least once a month
+- In file name, S## corresponds to well # on plate, counting across rows
+    - Ex: A1 = S1, A2 = S2, A3 = S3, ... H11 = S95, H12 = S96
+    - NB: If not a full plate, this changes the S## based on size of other samples on the same run
 
 ## Column Headers
 
