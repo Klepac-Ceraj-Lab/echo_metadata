@@ -43,3 +43,83 @@
 - C0634_1F_1A -> C0634_1F_3A
     - CollectionRep changed to 3
     - DOC: 2018-03-16
+
+### Fixes for previous samples
+
+Because many SampleIDs have changed since sequencing,
+and downstream analyses are based on SampleIDs contained in file names,
+many file names needed to be changed.
+It seemed best to start with the raw sequencing `.fastq.gz` files
+found in the lab G-Drive `/Volumes/G-DRIVE USB-C/ECHO/sequencing/mgx`.
+
+The raw sequencing files are found in the following subdirectories:
+
+- `IMR_May2018`
+- `IMR_Sep2018`
+- `IMR_Oct2018`
+- `IMR_Nov2018`
+
+and with `mgx/` as our current working directory,
+we can get the path to all `fastq.gz` files with `find`,
+and then narrow what we're searching for with `grep`
+
+```sh
+$ find IMR*/*.gz
+IMR_May2018/C016-3F-1A_S94_L001_R1_001.fastq.gz
+IMR_May2018/C016-3F-1A_S94_L001_R2_001.fastq.gz
+IMR_May2018/C016-3F-1A_S94_L002_R1_001.fastq.gz
+#...
+
+$ find IMR_*/*.gz | grep 604-1F-1A
+IMR_May2018/C604-1F-1A_S5_L001_R1_001.fastq.gz
+IMR_May2018/C604-1F-1A_S5_L001_R2_001.fastq.gz
+IMR_May2018/C604-1F-1A_S5_L002_R1_001.fastq.gz
+IMR_May2018/C604-1F-1A_S5_L002_R2_001.fastq.gz
+IMR_May2018/C604-1F-1A_S5_L003_R1_001.fastq.gz
+IMR_May2018/C604-1F-1A_S5_L003_R2_001.fastq.gz
+IMR_May2018/C604-1F-1A_S5_L004_R1_001.fastq.gz
+IMR_May2018/C604-1F-1A_S5_L004_R2_001.fastq.gz
+```
+
+But first, we need to fix samples that have 3 digit IDs instead of 4 digit IDs
+with leading zeros.
+To do this would require some arcane shell scripting, so I'll use julia instead.
+From the `mgx/` directory:
+
+```julia
+function expand_id(file)
+    # use regex to match the id portion of the file name
+    m = match(r"^(C|M)(\d+)(-\d[A-Z]-\d[A-Z].+)", file)
+    if m === nothing
+        # this means that the file doesn't have the expected pattern
+        return file
+    else
+        # left pad 4 spaces with zeros
+        i = lpad(string(m.captures[2]), 4, 0)
+        # concatenate string pieces
+        return m.captures[1] * i * m.captures[3]
+    end
+end
+
+
+for d in [d for d in readdir() if startswith(d, "IMR_")]
+    for f in readdir(d)
+        new_f = expand_id(f)
+        f != new_f && mv(joinpath(d, f), joinpath(d, new_f))
+    end
+end
+```
+
+Now:
+
+```sh
+$ find IMR_*/*.gz | grep 604-1F-1A
+IMR_May2018/C0604-1F-1A_S5_L001_R1_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L001_R2_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L002_R1_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L002_R2_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L003_R1_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L003_R2_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L004_R1_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L004_R2_001.fastq.gz
+``` 
