@@ -81,6 +81,8 @@ IMR_May2018/C604-1F-1A_S5_L004_R1_001.fastq.gz
 IMR_May2018/C604-1F-1A_S5_L004_R2_001.fastq.gz
 ```
 
+#### Leading Zeros
+
 But first, we need to fix samples that have 3 digit IDs instead of 4 digit IDs
 with leading zeros.
 To do this would require some arcane shell scripting, so I'll use julia instead.
@@ -122,4 +124,138 @@ IMR_May2018/C0604-1F-1A_S5_L003_R1_001.fastq.gz
 IMR_May2018/C0604-1F-1A_S5_L003_R2_001.fastq.gz
 IMR_May2018/C0604-1F-1A_S5_L004_R1_001.fastq.gz
 IMR_May2018/C0604-1F-1A_S5_L004_R2_001.fastq.gz
-``` 
+```
+
+#### Renaming fixes
+
+No we have to rename files based on changes to SampleIDs.
+I'll do this with `find`, `grep` and a for loop.
+
+For example, to change
+
+- **`C0604_1F_1A` -> `C2018_1F_1A`**
+- **`C0604_1F_2A` -> `C2018_1F_2A`**
+
+```sh
+$ for f in $(find IMR_*/*.gz | grep 0604); do
+    # this syntax says 'use variable f, but replace "0604" with "2018"'
+    mv -v $f ${f/0604/2018}
+  done
+```
+```
+IMR_May2018/C0604-1F-1A_S5_L001_R1_001.fastq.gz -> IMR_May2018/C2018-1F-1A_S5_L001_R1_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L001_R2_001.fastq.gz -> IMR_May2018/C2018-1F-1A_S5_L001_R2_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L002_R1_001.fastq.gz -> IMR_May2018/C2018-1F-1A_S5_L002_R1_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L002_R2_001.fastq.gz -> IMR_May2018/C2018-1F-1A_S5_L002_R2_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L003_R1_001.fastq.gz -> IMR_May2018/C2018-1F-1A_S5_L003_R1_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L003_R2_001.fastq.gz -> IMR_May2018/C2018-1F-1A_S5_L003_R2_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L004_R1_001.fastq.gz -> IMR_May2018/C2018-1F-1A_S5_L004_R1_001.fastq.gz
+IMR_May2018/C0604-1F-1A_S5_L004_R2_001.fastq.gz -> IMR_May2018/C2018-1F-1A_S5_L004_R2_001.fastq.gz
+IMR_May2018/C0604-1F-2A_S17_L001_R1_001.fastq.gz -> IMR_May2018/C2018-1F-2A_S17_L001_R1_001.fastq.gz
+IMR_May2018/C0604-1F-2A_S17_L001_R2_001.fastq.gz -> IMR_May2018/C2018-1F-2A_S17_L001_R2_001.fastq.gz
+IMR_May2018/C0604-1F-2A_S17_L002_R1_001.fastq.gz -> IMR_May2018/C2018-1F-2A_S17_L002_R1_001.fastq.gz
+IMR_May2018/C0604-1F-2A_S17_L002_R2_001.fastq.gz -> IMR_May2018/C2018-1F-2A_S17_L002_R2_001.fastq.gz
+IMR_May2018/C0604-1F-2A_S17_L003_R1_001.fastq.gz -> IMR_May2018/C2018-1F-2A_S17_L003_R1_001.fastq.gz
+IMR_May2018/C0604-1F-2A_S17_L003_R2_001.fastq.gz -> IMR_May2018/C2018-1F-2A_S17_L003_R2_001.fastq.gz
+IMR_May2018/C0604-1F-2A_S17_L004_R1_001.fastq.gz -> IMR_May2018/C2018-1F-2A_S17_L004_R1_001.fastq.gz
+IMR_May2018/C0604-1F-2A_S17_L004_R2_001.fastq.gz -> IMR_May2018/C2018-1F-2A_S17_L004_R2_001.fastq.gz
+```
+
+**C0551_2F_1A -> C0551_1F_2A**
+
+```sh
+$ for f in $(find IMR_*/*.gz | grep 0551-2F); do
+    mv -v $f ${f/0551-2F-1A/0551-1F-2A}
+  done
+```
+```
+IMR_May2018/C0551-2F-1A_S40_L001_R1_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_L001_R1_001.fastq.gz
+IMR_May2018/C0551-2F-1A_S40_L001_R2_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_L001_R2_001.fastq.gz
+IMR_May2018/C0551-2F-1A_S40_L002_R1_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_L002_R1_001.fastq.gz
+IMR_May2018/C0551-2F-1A_S40_L002_R2_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_L002_R2_001.fastq.gz
+IMR_May2018/C0551-2F-1A_S40_L003_R1_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_L003_R1_001.fastq.gz
+IMR_May2018/C0551-2F-1A_S40_L003_R2_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_L003_R2_001.fastq.gz
+IMR_May2018/C0551-2F-1A_S40_L004_R1_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_L004_R1_001.fastq.gz
+IMR_May2018/C0551-2F-1A_S40_L004_R2_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_L004_R2_001.fastq.gz
+```
+
+- **M0742_2F_1A -> M0742_2F_2A**
+    - 96-well position: A5
+    - S13
+
+
+- **M0742_2E_1A -> M0742_2E_2A**
+    - 96-well position: C9
+    - S33
+
+
+The following are all from batch 1, which came before we changed naming conventions
+and will need different handling.
+
+- C0499_1F_1A -> C0499_1F_2A
+- C0511_1F_1A -> C0511_1F_2A
+- C0066_6F_1A -> C0066_6F_2A
+- C0516_1F_1A -> C0516_1F_2A
+- C0229_4F_1A -> C0229_4F_2A
+
+**C0550_1F_1A -> C0550_1F_2A**
+
+This one was in the same batch, and got resolved as
+`C0550-1F-1A_S28` and `C0550-1F-1A-dup_S41`.
+The one with `dup` is supposed to be 2A based on the well number, so
+
+```sh
+$ for f in $(find IMR_*/*.gz | grep 0550 | grep dup); do
+    mv -v $f ${f/1A-dup/2A}
+  done
+```
+```
+IMR_May2018/C0550-1F-1A-dup_S41_L001_R1_001.fastq.gz -> IMR_May2018/C0550-1F-2A_S41_L001_R1_001.fastq.gz
+IMR_May2018/C0550-1F-1A-dup_S41_L001_R2_001.fastq.gz -> IMR_May2018/C0550-1F-2A_S41_L001_R2_001.fastq.gz
+IMR_May2018/C0550-1F-1A-dup_S41_L002_R1_001.fastq.gz -> IMR_May2018/C0550-1F-2A_S41_L002_R1_001.fastq.gz
+IMR_May2018/C0550-1F-1A-dup_S41_L002_R2_001.fastq.gz -> IMR_May2018/C0550-1F-2A_S41_L002_R2_001.fastq.gz
+IMR_May2018/C0550-1F-1A-dup_S41_L003_R1_001.fastq.gz -> IMR_May2018/C0550-1F-2A_S41_L003_R1_001.fastq.gz
+IMR_May2018/C0550-1F-1A-dup_S41_L003_R2_001.fastq.gz -> IMR_May2018/C0550-1F-2A_S41_L003_R2_001.fastq.gz
+IMR_May2018/C0550-1F-1A-dup_S41_L004_R1_001.fastq.gz -> IMR_May2018/C0550-1F-2A_S41_L004_R1_001.fastq.gz
+IMR_May2018/C0550-1F-1A-dup_S41_L004_R2_001.fastq.gz -> IMR_May2018/C0550-1F-2A_S41_L004_R2_001.fastq.gz
+```
+
+**C0634_1E_1A -> C0634_1E_2A**
+
+This is the one in `batch002` (sent in May),
+
+```sh
+$ for f in $(find IMR_*/*.gz | grep 0634-1E-1A | grep May); do
+    mv -v $f ${f/1E-1A/1E-2A}
+  done
+```
+```
+IMR_May2018/C0634-1E-1A_S46_L001_R1_001.fastq.gz -> IMR_May2018/C0634-1E-2A_S46_L001_R1_001.fastq.gz
+IMR_May2018/C0634-1E-1A_S46_L001_R2_001.fastq.gz -> IMR_May2018/C0634-1E-2A_S46_L001_R2_001.fastq.gz
+IMR_May2018/C0634-1E-1A_S46_L002_R1_001.fastq.gz -> IMR_May2018/C0634-1E-2A_S46_L002_R1_001.fastq.gz
+IMR_May2018/C0634-1E-1A_S46_L002_R2_001.fastq.gz -> IMR_May2018/C0634-1E-2A_S46_L002_R2_001.fastq.gz
+IMR_May2018/C0634-1E-1A_S46_L003_R1_001.fastq.gz -> IMR_May2018/C0634-1E-2A_S46_L003_R1_001.fastq.gz
+IMR_May2018/C0634-1E-1A_S46_L003_R2_001.fastq.gz -> IMR_May2018/C0634-1E-2A_S46_L003_R2_001.fastq.gz
+IMR_May2018/C0634-1E-1A_S46_L004_R1_001.fastq.gz -> IMR_May2018/C0634-1E-2A_S46_L004_R1_001.fastq.gz
+IMR_May2018/C0634-1E-1A_S46_L004_R2_001.fastq.gz -> IMR_May2018/C0634-1E-2A_S46_L004_R2_001.fastq.gz
+```
+
+**C0634_1F_1A -> C0634_1F_3A**
+
+Based on the well numbers for the sequencing plate, this is the one labeled S33
+
+```sh
+$ for f in $(find IMR_*/*.gz | grep 0634-1F-1A | grep S33); do
+    mv -v $f ${f/1F-1A/1F-3A}
+  done
+```
+```
+IMR_May2018/C0634-1F-1A_S33_L001_R1_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L001_R1_001.fastq.gz
+IMR_May2018/C0634-1F-1A_S33_L001_R2_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L001_R2_001.fastq.gz
+IMR_May2018/C0634-1F-1A_S33_L002_R1_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L002_R1_001.fastq.gz
+IMR_May2018/C0634-1F-1A_S33_L002_R2_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L002_R2_001.fastq.gz
+IMR_May2018/C0634-1F-1A_S33_L003_R1_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L003_R1_001.fastq.gz
+IMR_May2018/C0634-1F-1A_S33_L003_R2_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L003_R2_001.fastq.gz
+IMR_May2018/C0634-1F-1A_S33_L004_R1_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L004_R1_001.fastq.gz
+IMR_May2018/C0634-1F-1A_S33_L004_R2_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L004_R2_001.fastq.gz
+```
