@@ -16,6 +16,7 @@ the following steps need to be taken:
 - [ ] Verify that all samples included in batch have correct
   number of files (usually 8; 4 lanes each of fwd and rev)
 - [ ] Move files into `ECHO/sequencing/mgx/rawfastq`
+- [ ] Copy files to NTM
 
 ## Download the `zip` file from dropbox to the G-Drive attached to `rosalind`
 
@@ -184,4 +185,12 @@ $ for f in $(ls RowlandMetaG); do if [ -f rawfastq/$f ]; then echo "$f already e
 
 ```sh
 $ mv -nv RowlandMetaG/* rawfastq/
+```
+
+## Copy Files to NTM
+
+Assuming the lab drive on NTM is mounted
+
+```
+$ rsync -avzP ./ /Volumes/vkclab/ECHO/sequencing/mgx/
 ```
