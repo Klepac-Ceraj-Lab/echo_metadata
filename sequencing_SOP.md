@@ -163,7 +163,7 @@ we'll use `md5sum` which creates a hash of the file contents
 
 ```sh
 $ cd RowlandMetaG
-$ md5sum * > ../details/batch006.md5
+$ md5sum *.fastq.gz > ../details/batch006.md5
 ```
 
 Which looks like this:
