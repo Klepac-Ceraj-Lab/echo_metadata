@@ -18,6 +18,9 @@ the following steps need to be taken:
 - [ ] Move files into `ECHO/sequencing/mgx/rawfastq`
 - [ ] Copy files to NTM
 
+**NOTE:** If the sequencing center sends multiple links for a sigle batch,
+See bottom of this page for special notes.
+
 ## Download the `zip` file from dropbox to the G-Drive attached to `rosalind`
 
 The sequencing facility will e-mail a dropbox link, such as
@@ -178,7 +181,7 @@ a98e4c376a5b5bcbaadb8a7fb5f3c3f5  C0047-7F-1A_S9_L003_R1_001.fastq.gz
 
 ```sh
 $ cd ..
-$ for f in $(ls RowlandMetaG); do if [ -f rawfastq/$f ]; then echo "$f already exists!"; fi; done
+$ for f in $(ls RowlandMetaG); do if [ -f rawfastq/$f ]; then echo "$f already exists"; fi; done
 ```
 
 ## Move files into `ECHO/sequencing/mgx/rawfastq`
@@ -194,3 +197,13 @@ Assuming the lab drive on NTM is mounted
 ```
 $ rsync -avzP ./ /Volumes/vkclab/ECHO/sequencing/mgx/
 ```
+
+## Handling multiple dropbox links in a single batch.
+
+If the sequencing center sends multiple links for a single bactch
+
+- each dropbox link should be downloaded to a separate zip file (append `_#.zip`)
+- Each zip file should have a separate `_details_#.txt`
+- The contents of each zip file should have their own md5 checksum (append `_#.md5`)
+- All files from all of of the zip files can be added to a single `_files.txt`
+  - be sure to use `>>` instead of `>` to append to the file instead of overwriting it.
