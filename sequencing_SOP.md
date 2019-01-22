@@ -72,7 +72,7 @@ Archive:  nov2018.zip
 ```
 
 Makes sure that the correct number of files is present -
-there should be 8 samples per sample (4 lanes each of forward and reverse).
+there should be 8 files per sample (4 lanes each of forward and reverse).
 In this case, there were 66 samples, plus one "file" for the folder itself
 
 `66 samples x 2 x 4 lanes + 1 == 529`
