@@ -183,11 +183,42 @@ IMR_May2018/C0551-2F-1A_S40_L004_R2_001.fastq.gz -> IMR_May2018/C0551-1F-2A_S40_
     - 96-well position: A5
     - S13
 
+```sh
+$ for f in $(find rawfastq/*.gz | grep 0742| grep S13); do
+    mv -v $f ${f/-2F-1A/-2F-2A}
+  done
+```
+```
+rawfastq/M0742-2F-1A_S13_L001_R1_001.fastq.gz -> rawfastq/M0742-2F-2A_S13_L001_R1_001.fastq.gz
+rawfastq/M0742-2F-1A_S13_L001_R2_001.fastq.gz -> rawfastq/M0742-2F-2A_S13_L001_R2_001.fastq.gz
+rawfastq/M0742-2F-1A_S13_L002_R1_001.fastq.gz -> rawfastq/M0742-2F-2A_S13_L002_R1_001.fastq.gz
+rawfastq/M0742-2F-1A_S13_L002_R2_001.fastq.gz -> rawfastq/M0742-2F-2A_S13_L002_R2_001.fastq.gz
+rawfastq/M0742-2F-1A_S13_L003_R1_001.fastq.gz -> rawfastq/M0742-2F-2A_S13_L003_R1_001.fastq.gz
+rawfastq/M0742-2F-1A_S13_L003_R2_001.fastq.gz -> rawfastq/M0742-2F-2A_S13_L003_R2_001.fastq.gz
+rawfastq/M0742-2F-1A_S13_L004_R1_001.fastq.gz -> rawfastq/M0742-2F-2A_S13_L004_R1_001.fastq.gz
+rawfastq/M0742-2F-1A_S13_L004_R2_001.fastq.gz -> rawfastq/M0742-2F-2A_S13_L004_R2_001.fastq.gz
+```
+
 
 - **M0742_2E_1A -> M0742_2E_2A**
     - 96-well position: C9
     - S33
 
+```sh
+$ for f in $(find rawfastq/*.gz | grep 0742-2E-1A | grep S33); do
+    mv -v $f ${f/2E-1A/2E-2A}
+  done
+```
+
+```
+rawfastq/M0742-2E-1A-C9_S33_L001_R1_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_L001_R1_001.fastq.gz
+rawfastq/M0742-2E-1A-C9_S33_L001_R2_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_L001_R2_001.fastq.gz
+rawfastq/M0742-2E-1A-C9_S33_L002_R1_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_L002_R1_001.fastq.gz
+rawfastq/M0742-2E-1A-C9_S33_L002_R2_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_L002_R2_001.fastq.gz
+rawfastq/M0742-2E-1A-C9_S33_L003_R1_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_L003_R1_001.fastq.gz
+rawfastq/M0742-2E-1A-C9_S33_L003_R2_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_L003_R2_001.fastq.gz
+rawfastq/M0742-2E-1A-C9_S33_L004_R1_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_L004_R1_001.fastq.gz
+```
 
 The following are all from batch 1, which came before we changed naming conventions
 and will need different handling.
