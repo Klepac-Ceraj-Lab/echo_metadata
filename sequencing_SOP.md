@@ -89,32 +89,6 @@ where `###` is the batch number (eg `006`), and put it in the `details/` folder.
 $ unzip -l nov2018.zip > details/batch006_details.txt
 ```
 
-### Create `batch###_files.txt`
-
-We also want a file that contains only the file names,
-so if we ever need the files from a single batch in the future,
-we can easily get them.
-To do this, we'll use `sed` and some regular expressions.
-
-```sh
-$ cat details/batch006_details.txt | grep fastq | sed -E "s/.+RowlandMetaG\/([^\]+\.fastq.gz)/\1/"
-C0047-7F-1A_S9_L001_R1_001.fastq.gz
-C0047-7F-1A_S9_L001_R2_001.fastq.gz
-C0047-7F-1A_S9_L002_R1_001.fastq.gz
-C0047-7F-1A_S9_L002_R2_001.fastq.gz
-C0047-7F-1A_S9_L003_R1_001.fastq.gz
-# ...
-```
-
-If the folder inside the `zip` file is something other than `RowlandMetaG`,
-be sure to replace that part of the regular expression.
-
-Now pipe the results of this command to a file called `batch###_files.txt`.
-
-```sh
-$ cat details/batch006_details.txt | grep fastq | sed -E "s/.+RowlandMetaG\/([^\]+\.fastq.gz)/\1/" > batch006_files.txt
-```
-
 ## Extract the `zip` file into its own folder
 
 Use `unzip` to extract the contents of the `.zip` file.
@@ -151,8 +125,31 @@ ls -l  RowlandMetaG/ | tail -5
 You can also test that you have the right number of files:
 
 ```sh
-$ ls RowlandMetaG | wc -l
+$ ls RowlandMetaG/*.fastq.gz | wc -l
     528
+```
+
+### Create `batch###_files.txt`
+
+We also want a file that contains only the file names,
+so if we ever need the files from a single batch in the future,
+we can easily get them.
+
+
+```sh
+$ ls RowlandMetaG | grep fastq.gz
+C0047-7F-1A_S9_L001_R1_001.fastq.gz
+C0047-7F-1A_S9_L001_R2_001.fastq.gz
+C0047-7F-1A_S9_L002_R1_001.fastq.gz
+C0047-7F-1A_S9_L002_R2_001.fastq.gz
+C0047-7F-1A_S9_L003_R1_001.fastq.gz
+# ...
+```
+
+Now pipe the results of this command to a file called `batch###_files.txt`.
+
+```sh
+$ ls RowlandMetaG | grep fastq.gz > batch006_files.txt
 ```
 
 ### Create batch###.md5
