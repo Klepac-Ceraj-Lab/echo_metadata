@@ -220,6 +220,25 @@ rawfastq/M0742-2E-1A-C9_S33_L003_R2_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_
 rawfastq/M0742-2E-1A-C9_S33_L004_R1_001.fastq.gz -> rawfastq/M0742-2E-2A-C9_S33_L004_R1_001.fastq.gz
 ```
 
+- Remove well number from file names M0742_2E_1A and M0742_2E_2A
+
+```sh
+for f in $(find sequencing/mgx/rawfastq | grep 742 | grep 2A-C9); do mv -vn $f ${f/2A-C9/2A}; done
+```
+
+```
+sequencing/mgx/rawfastq/M0742-2E-2A-C9_S33_L001_R1_001.fastq.gz -> sequencing/mgx/rawfastq/M0742-2E-2A_S33_L001_R1_001.fastq.gz
+sequencing/mgx/rawfastq/M0742-2E-2A-C9_S33_L001_R2_001.fastq.gz -> sequencing/mgx/rawfastq/M0742-2E-2A_S33_L001_R2_001.fastq.gz
+sequencing/mgx/rawfastq/M0742-2E-2A-C9_S33_L002_R1_001.fastq.gz -> sequencing/mgx/rawfastq/M0742-2E-2A_S33_L002_R1_001.fastq.gz
+sequencing/mgx/rawfastq/M0742-2E-2A-C9_S33_L002_R2_001.fastq.gz -> sequencing/mgx/rawfastq/M0742-2E-2A_S33_L002_R2_001.fastq.gz
+sequencing/mgx/rawfastq/M0742-2E-2A-C9_S33_L003_R1_001.fastq.gz -> sequencing/mgx/rawfastq/M0742-2E-2A_S33_L003_R1_001.fastq.gz
+sequencing/mgx/rawfastq/M0742-2E-2A-C9_S33_L003_R2_001.fastq.gz -> sequencing/mgx/rawfastq/M0742-2E-2A_S33_L003_R2_001.fastq.gz
+sequencing/mgx/rawfastq/M0742-2E-2A-C9_S33_L004_R1_001.fastq.gz -> sequencing/mgx/rawfastq/M0742-2E-2A_S33_L004_R1_001.fastq.gz
+sequencing/mgx/rawfastq/M0742-2E-2A-C9_S33_L004_R2_001.fastq.gz -> sequencing/mgx/rawfastq/M0742-2E-2A_S33_L004_R2_001.fastq.gz
+```
+
+
+
 The following are all from batch 1, which came before we changed naming conventions
 and will need different handling.
 
