@@ -309,3 +309,19 @@ IMR_May2018/C0634-1F-1A_S33_L003_R2_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_
 IMR_May2018/C0634-1F-1A_S33_L004_R1_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L004_R1_001.fastq.gz
 IMR_May2018/C0634-1F-1A_S33_L004_R2_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_L004_R2_001.fastq.gz
 ```
+
+#### Files changed during renaming
+
+- Some files were overwritten when changing file names
+
+1. M0742_2F_1A_S33 (all lanes)
+  * batch006
+  * pull from sequencing center
+2. M0742_2E_1A_S7 (just lane 1 L001)
+  * batch005
+  * found on Harvard server
+
+```sh
+$ rsync -avzP --exclude='*.zip' mgx /Volumes/vkclab/ECHO/sequencing/
+
+```  
