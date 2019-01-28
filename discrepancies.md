@@ -128,7 +128,7 @@ IMR_May2018/C0604-1F-1A_S5_L004_R2_001.fastq.gz
 
 #### Renaming fixes
 
-No we have to rename files based on changes to SampleIDs.
+Now we have to rename files based on changes to SampleIDs.
 I'll do this with `find`, `grep` and a for loop.
 
 For example, to change
