@@ -50,7 +50,7 @@ Because many SampleIDs have changed since sequencing,
 and downstream analyses are based on SampleIDs contained in file names,
 many file names needed to be changed.
 It seemed best to start with the raw sequencing `.fastq.gz` files
-found in the lab G-Drive `/Volumes/G-DRIVE USB-C/ECHO/sequencing/mgx`.
+found in the lab G-Drive `/Volumes/G-DRIVE\ USB-C/ECHO/sequencing/mgx`.
 
 The raw sequencing files are found in the following subdirectories:
 
