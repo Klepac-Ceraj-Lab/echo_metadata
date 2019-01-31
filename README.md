@@ -44,5 +44,14 @@
     - N = sent, not yet sequenced
     - changed to "Sequenced" and "Sent" in AirTable
 - Mgx_batch: dictates which batch sample was sequenced in, batch is defined by separate 96-well plates
+    - batch001 = DOM 2018-02-20
+    - batch002 = DOM 2018-05-17
+    - batch003 = DOM 2018-05-17
+    - batch004 = DOM 2018-09-05
+    - batch005 = DOM 2018-10-03
+    - batch006 = DOM 2018-11-19
+    - batch007 = DOM 2018-12-19
+- 16S_batch: dictates which batch samples were sequenced in, *different* than Mgx_batch in that grouped by shipment
+- 16S_plate: dictates plate number within batch (aka shipment)
 - Notes: miscellaneous comments on that sample
 - Discrepancies: connects to separate table on AirTable, documents samples with identical SampleIDs or other questions/mistakes in the record accumulated through processing
