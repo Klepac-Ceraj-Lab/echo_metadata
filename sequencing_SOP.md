@@ -197,7 +197,7 @@ $ rsync -avzP ./ /Volumes/vkclab/ECHO/sequencing/mgx/
 
 ## Handling multiple dropbox links in a single batch.
 
-If the sequencing center sends multiple links for a single bactch
+If the sequencing center sends multiple links for a single batch
 
 - each dropbox link should be downloaded to a separate zip file (append `_#.zip`)
 - Each zip file should have a separate `_details_#.txt`
