@@ -37,7 +37,7 @@ has broken. Any broken collection tubes should be disposed of in biohazardous
 waste and noted in the database. To stay organized, place all samples in test
 tube racks within the -80C freezer as temporary storage.
 
-### Input new samples into database
+### Inputting new samples into database
 
 (see **Updating databases** section below for more information about AirTable)
 
@@ -47,10 +47,10 @@ in AirTable.
 
 #### What is given
 **Fecal with Ethanol Shipment 6/14/2019**
+
 | Participant ID | Date of Collection | Date in -80 | Date Shipped | Notes |
 |----------------|--------------------|-------------|--------------|-------|
 | SD34E          | 5/9/2019 CL        | 5/12/2019 CL| 6/14/2019    | Twins (32, 34) |
-|----------------|--------------------|-------------|--------------|-------|
 | SDM1044B       | 5/2/2019 LD        | 5/15/2019 CL| 6/14/2019    | 2 wks in fridge |
 
 #### What you want
@@ -58,10 +58,9 @@ in AirTable.
 | SampleID | Mother_Child | SubjectID | MaternalID | TimePoint | Fecal_EtOH | DOC | RAInitials_DOC | DOF | RAInitials_DOF | Date_Brought_In | RAInitials_Brought | Date_Shipped | RAInitials_Shipped | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | C0034_5E_1A | C | 0034 | 0032_m | 5 | E | 2019-05-09 | CL | 2019-05-12 | CL |   |   | 2019-06-14 | SR | Twins (32, 34) |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | M1044_2E_1A | M | 1044 | 1044_m | 2 | E | 2019-05-02 | LD | 2019-05-15 | CL |   |   | 2019-06-14 | SR | 2 wks in fridge |
 
-Use the `Inputting new samples` view to add new samples.
+Use the `Inputting new samples` view to add new sample information into AirTable.
 
 ### Aliquoting fecal samples
 
@@ -88,7 +87,7 @@ Then open `samplelabel_template.docx` and copy each page individually into the
 template. Save each page of sample labels as `.docx` and `.pdf` file in the
 format `YYYY-MM-DD_fecal_#`. Once ready, print each **pdf** file of labels onto
 Tough Tags (Cat. No. ). Pages tend to stick to each other so load and print
-each page one-by-one. Label each printed page of labels with Sharpie with date
+each page one-by-one. Label each printed page of labels with marker with date
 and #/total # pages.
 
 ```
@@ -107,10 +106,10 @@ YYYYMMDD_fecal_#.pdf
 - [ ] 1000 ul pipette
 - [ ] Wide orifice, filtered 1000 ul pipette tips
 - [ ] Cryovials (1-2 ml)
-- [ ] Cryobox
+- [ ] Cryoboxes
 - [ ] Test tube rack
 - [ ] Expandable small tube rack
-- [ ] Sharpie
+- [ ] Marker
 - [ ] Sample labels (see above)
 - [ ] Biosafety cabinet
 - [ ] 70% ethanol (for sterilization)
@@ -121,12 +120,42 @@ YYYYMMDD_fecal_#.pdf
 
 1. Turn on blower and light in biosafety cabinet and open sash. Let air flow for
 3-15 mins, depending on particular model.
-2. Go to 'master_fecal_samples' base on AirTable. Open 'Master' table, 'Aliquoting' view.
-Filter
+2. Go to 'master_fecal_samples' base on AirTable. Open 'Master' table,
+'Aliquoting' view. Filter by DOC such that only 16-32 samples are shown. Print
+this page for keeping track of samples and for recording all the information in
+your lab notebook.
+3. With full ice bucket, take selected samples out of -80C freezer. Arrange in
+same order as printed database page. Let defrost on ice.
+4. Clean inside of biosafety cabinet with 70% ethanol. Place pipette, tips, bag of
+cryovials, test tube rack, small tube rack, marker, and biohazardous waste bag in
+biosafety cabinet, wiping each item with ethanol in order to sterilize.
+5. Arrange two cryovials per sample in small tube rack. Label first of each pair
+with SampleID.
+6. Take samples out of ice and arrange in test tube rack.
+7. Pipette 1000 ul of each sample into each cryovial.  
+  - *Note:* this does not have to be exact. It is recommended to set pipette to
+  900 ul to avoid fecal sample touching filter at top of pipette tip.
+  - Make any notes about unusual samples or inconsistencies between the fecal
+  sample database and the label on the OMNIgene Gut tube.
+8. When all samples are aliquoted, put aliquots on ice. If all sample tube labels
+have been double checked, they can be thrown in the biohazardous waste bag.
+  - It is recommended to dispose of the biohazardous waste bag into a larger
+  collection bag as it can be very smelly if left open on the bench top, even
+  after being emptied.)
+9. Remove all items from biosafety cabinet. Wipe down with 70% ethanol. Let vent
+for 5 mins. Then close sash and turn off light and blower.
+10. Label all aliquots. Put in appropriate cryoboxes, noting which boxes samples
+are stored in. Store cryoboxes in the appropriate shelf in -80C freezer.
+11. Update AirTable in 'Aliquoting' view with Date_Aliquoted, Number_Replicates, RAInitials_Aliquoted, StorageBox, and any Notes.
 
 ***
 
 ### Storing ethanol samples
+
+Ethanol samples will be processed later for metabolimics. Until that processing
+begins, samples should be stored in 4" tall cryoboxes with 16 dividers. Record
+StorageBox of these ethanol samples so it is easy to find them for later analysis.
+The 'Ethanol storage' view is useful for this task.
 
 ***
 
