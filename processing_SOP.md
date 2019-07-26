@@ -10,27 +10,27 @@ Samples should be picked up from the Advanced Baby Imaging Lab in Providence, RI
 
 ##### Advanced Baby Imaging Lab address:
 
-_555 Prospect St
+_555 Prospect St_
 
-Pawtucket, RI 02860_
+_Pawtucket, RI 02860_
 
 ~1 hr drive from Wellesley College
 
 #### What to bring there
-[]Large styrofoam box
-- []Dry ice (available in blue cooler on 2nd floor of L-wing)
-[]USB drive
+- [ ] Large styrofoam box
+  - [ ] Dry ice (available in blue cooler on 2nd floor of L-wing)
+- [ ] USB drive
 
 #### What to bring back
-[]Large styrofoam box
-- []Dry ice
-- []Fecal samples
-- []Ethanol samples
-[]USB drive
-- []Latest deidentified version of FIleMaker Pro database (.fmp12 file)
-- []Electronic copy of sample spreadsheets
-[]Fecal sample spreadsheet (with all samples included in this shipment)
-[]Ethanol sample spreadsheet (with all samples included in this shipment)
+- [ ] Large styrofoam box
+  - [ ] Dry ice
+  - [ ] Fecal samples
+  - [ ] Ethanol samples
+- [ ] USB drive
+  - [ ] Latest deidentified version of FIleMaker Pro database (.fmp12 file)
+  - [ ] Electronic copy of sample spreadsheets
+- [ ] Fecal sample spreadsheet (with all samples included in this shipment)
+- [ ] Ethanol sample spreadsheet (with all samples included in this shipment)
 
 ## Storing samples
 
@@ -84,20 +84,20 @@ YYYY-MM-DD_fecal_#.pdf
 
 #### Aliquoting Protocol
 ##### Materials
-[]1000 ul pipette
-[]Wide orifice, filtered 1000 ul pipette tips
-[]Cryovials (1-2 ml)
-[]Cryobox
-[]Test tube rack
-[]Expandable small tube rack
-[]Sharpie
-[]Sample labels (see above)
-[]Biosafety cabinet
-[]70% ethanol (for sterilization)
-[]Paper towels
-[]Small biohazardous waste bag
-[]Ice bucket
-[]Ice
+- [ ] 1000 ul pipette
+- [ ] Wide orifice, filtered 1000 ul pipette tips
+- [ ] Cryovials (1-2 ml)
+- [ ] Cryobox
+- [ ] Test tube rack
+- [ ] Expandable small tube rack
+- [ ] Sharpie
+- [ ] Sample labels (see above)
+- [ ] Biosafety cabinet
+- [ ] 70% ethanol (for sterilization)
+- [ ] Paper towels
+- [ ] Small biohazardous waste bag
+- [ ] Ice bucket
+- [ ] Ice
 
 1. Turn on blower and light in biosafety cabinet and open sash. Let air flow for
 3-15 mins, depending on particular model.
