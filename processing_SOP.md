@@ -8,20 +8,15 @@ Samples should be picked up from the Advanced Baby Imaging Lab in Providence, RI
 *Note*: From now on, 'fecal' = OMNIgene Gut tubes for DNA/RNA,
 'ethanol' = collection tubes filled with pure ethanol for metabolimics
 
-##### Advanced Baby Imaging Lab address:
+**Advanced Baby Imaging Lab address:** _555 Prospect St, Pawtucket, RI 02860_
+(~1 hr drive from Wellesley College)
 
-_555 Prospect St_
-
-_Pawtucket, RI 02860_
-
-~1 hr drive from Wellesley College
-
-#### What to bring there
+### What to bring there
 - [ ] Large styrofoam box
   - [ ] Dry ice (available in blue cooler on 2nd floor of L-wing)
 - [ ] USB drive
 
-#### What to bring back
+### What to bring back
 - [ ] Large styrofoam box
   - [ ] Dry ice
   - [ ] Fecal samples
@@ -32,17 +27,41 @@ _Pawtucket, RI 02860_
 - [ ] Fecal sample spreadsheet (with all samples included in this shipment)
 - [ ] Ethanol sample spreadsheet (with all samples included in this shipment)
 
+***
+
 ## Storing samples
 
 All samples are stored in -80C freezer. When unloading a new shipment, all
 samples should be taken out of any biomedical bags unless the sample tube
 has broken. Any broken collection tubes should be disposed of in biohazardous
-waste. To stay organized, place all samples in test tube racks within the -80C
-freezer as temporary storage.
+waste and noted in the database. To stay organized, place all samples in test
+tube racks within the -80C freezer as temporary storage.
 
-**Input new samples into database**
+### Input new samples into database
 
-(see Updating databases section below)
+(see **Updating databases** section below for more information about AirTable)
+
+Open the digital copy of the sample spreadsheets (fecal and ethanol). Copy one
+spreadsheet into a new spreadsheet to reformat the information to match what is
+in AirTable.
+
+#### What is given
+**Fecal with Ethanol Shipment 6/14/2019**
+| Participant ID | Date of Collection | Date in -80 | Date Shipped | Notes |
+|----------------|--------------------|-------------|--------------|-------|
+| SD34E          | 5/9/2019 CL        | 5/12/2019 CL| 6/14/2019    | Twins (32, 34) |
+|----------------|--------------------|-------------|--------------|-------|
+| SDM1044B       | 5/2/2019 LD        | 5/15/2019 CL| 6/14/2019    | 2 wks in fridge |
+
+#### What you want
+
+| SampleID | Mother_Child | SubjectID | MaternalID | TimePoint | Fecal_EtOH | DOC | RAInitials_DOC | DOF | RAInitials_DOF | Date_Brought_In | RAInitials_Brought | Date_Shipped | RAInitials_Shipped | Notes |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| C0034_5E_1A | C | 0034 | 0032_m | 5 | E | 2019-05-09 | CL | 2019-05-12 | CL |   |   | 2019-06-14 | SR | Twins (32, 34) |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| M1044_2E_1A | M | 1044 | 1044_m | 2 | E | 2019-05-02 | LD | 2019-05-15 | CL |   |   | 2019-06-14 | SR | 2 wks in fridge |
+
+Use the `Inputting new samples` view to add new samples.
 
 ### Aliquoting fecal samples
 
@@ -78,9 +97,10 @@ My Drive/VKC LAB/Project & Personal Folders/ECHO Resonance/ECHO Sample Labels/
 ...
 samplelabel_drafts.xlsx
 samplelabel_template.docx
-YYYY-MM-DD_fecal_#.docx
-YYYY-MM-DD_fecal_#.pdf
+YYYYMMDD_fecal_#.docx
+YYYYMMDD_fecal_#.pdf
 ```
+***
 
 #### Aliquoting Protocol
 ##### Materials
@@ -104,24 +124,51 @@ YYYY-MM-DD_fecal_#.pdf
 2. Go to 'master_fecal_samples' base on AirTable. Open 'Master' table, 'Aliquoting' view.
 Filter
 
+***
 
 ### Storing ethanol samples
 
+***
+
 ##  Extracting DNA/RNA
 
+***
+
 ## Sending for sequencing
+
+***
 
 ## Updating databases
 
 The relevant database for fecal sample processing information is the
-'master_fecal_samples' base on AirTable. The 'Master' table, 'Everything'
-view is version controlled as 'master_fecal_samples.csv' in the git repo
-'echo_metadata'. 'master_fecal_samples.csv' is also saved in the
-`echo/databases/` folder on `rosalind:/Volumes/vkclab/`,
-`rosalind:/Volumes/franklin/`, and `ada:/lovelace/`
+`master_fecal_samples` base on AirTable. The `Master` table, `Everything`
+view is version controlled as `master_fecal_samples.csv` in the git repo
+`echo_metadata` and synced across other lab storage drives
 (see below for how to sync these and other files stored on these drives).
 
-### master_fecal_samples base overview
+```
+# relevant paths for database storage
+# on personal computer, remote git repo
+~/gitrepos/echo_metadata/
+master_fecal_samples.csv
+
+# lab storage drives
+# "NTM"
+rosalind:/Volumes/vkclab/echo/databases/
+# "Franklin"
+rosalind:/Volumes/franklin/ECHO/Databases/
+# "Lovelace"
+ada:/lovelace/echo/databases/
+...
+master_fecal_samples.csv
+YYYYMMDD_deidentified.fmp12
+# Note: identifiable version of FileMaker Pro database CANNOT be put on NTM
+YYYYMMDD_identifiable.fmp12
+```
+
+***
+
+### master_fecal_samples AirTable base overview
 #### Tables
 ##### Master
 ###### Everything
