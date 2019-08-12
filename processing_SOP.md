@@ -55,9 +55,9 @@ in AirTable.
 
 #### What you want
 
-| SampleID | Mother_Child | SubjectID | MaternalID | TimePoint | Fecal_EtOH | DOC | RAInitials_DOC | DOF | RAInitials_DOF | Date_Brought_In | RAInitials_Brought | Date_Shipped | RAInitials_Shipped | Notes |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| C0034_5E_1A | C | 0034 | 0032_m | 5 | E | 2019-05-09 | CL | 2019-05-12 | CL |   |   | 2019-06-14 | SR | Twins (32, 34) |
+| SampleID | Mother_Child | SubjectID | MaternalID | TimePoint | Fecal_EtOH | CollectionRep | DOC | RAInitials_DOC | DOF | RAInitials_DOF | Date_Brought_In | RAInitials_Brought | Date_Shipped | RAInitials_Shipped | Notes |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| C0034_5E_1A | C | 0034 | 0032_m | 5 | E | 1 | 2019-05-09 | CL | 2019-05-12 | CL |   |   | 2019-06-14 | SR | Twins (32, 34) |
 | M1044_2E_1A | M | 1044 | 1044_m | 2 | E | 2019-05-02 | LD | 2019-05-15 | CL |   |   | 2019-06-14 | SR | 2 wks in fridge |
 
 Use the `Inputting new samples` view to add new sample information into AirTable.
