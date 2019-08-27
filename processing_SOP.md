@@ -1,11 +1,11 @@
 # Processing fecal samples
 
-1. [Picking up samples] (#picking-up-shipments-of-samples)
-2. [Storing samples] (#storing-samples)
-  * [Aliquoting] (#aliquoting-fecal-samples)
-3. [Extracting DNA/RNA] (#extracting-dna-rna)
-4. [Sending for sequencing] (#sending-for-sequencing)
-5. [Updating databases] (#updating-databases)
+1. [Picking up samples](#picking-up-shipments-of-samples)
+2. [Storing samples](#storing-samples)
+  * [Aliquoting](#aliquoting-fecal-samples)
+3. [Extracting DNA/RNA](#extracting-dna-rna)
+4. [Sending for sequencing](#sending-for-sequencing)
+5. [Updating databases](#updating-databases)
 
 ## Picking up shipments of samples
 
@@ -29,7 +29,7 @@ Samples should be picked up from the Advanced Baby Imaging Lab in Providence, RI
   - [ ] Fecal samples
   - [ ] Ethanol samples
 - [ ] USB drive
-  - [ ] Latest deidentified version of FIleMaker Pro database (.fmp12 file)
+  - [ ] Latest deidentified version of FileMaker Pro database (.fmp12 file)
   - [ ] Electronic copy of sample spreadsheets
 - [ ] Fecal sample spreadsheet (with all samples included in this shipment)
 - [ ] Ethanol sample spreadsheet (with all samples included in this shipment)
@@ -46,7 +46,7 @@ tube racks within the -80C freezer as temporary storage.
 
 ### Inputting new samples into database
 
-(see [Updating databases] (#updating-databases) section below for more information about AirTable)
+(see [Updating databases](#updating-databases) section below for more information about AirTable)
 
 Open the digital copy of the sample spreadsheets (fecal and ethanol). Copy one
 spreadsheet into a new spreadsheet to reformat the information to match what is
@@ -153,7 +153,8 @@ have been double checked, they can be thrown in the biohazardous waste bag.
 for 5 mins. Then close sash and turn off light and blower.
 10. Label all aliquots. Put in appropriate cryoboxes, noting which boxes samples
 are stored in. Store cryoboxes in the appropriate shelf in -80C freezer.
-11. Update AirTable in 'Aliquoting' view with Date_Aliquoted, Number_Replicates, RAInitials_Aliquoted, StorageBox, and any Notes.
+11. Update AirTable in 'Aliquoting' view with Date_Aliquoted, Number_Replicates,
+RAInitials_Aliquoted, StorageBox, and any Notes.
 
 ***
 
@@ -276,7 +277,7 @@ below for more details).
 
 ### Loading samples
 1. Fill out submission sheet.
-  - *Note*: check Integrated Microbiome Resource's [submission guidelines] (https://imr.bio/submissions.html)
+  - *Note*: check Integrated Microbiome Resource's [submission guidelines](https://imr.bio/submissions.html)
   for updated versions before filling out.
 ```$
 # Submission sheet:
