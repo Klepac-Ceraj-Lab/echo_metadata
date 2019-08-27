@@ -3,7 +3,7 @@
 1. [Picking up samples](#picking-up-shipments-of-samples)
 2. [Storing samples](#storing-samples)
   * [Aliquoting](#aliquoting-fecal-samples)
-3. [Extracting DNA/RNA](#extracting-dna-rna)
+3. [Extracting DNA/RNA](#extracting-dna-and-rna)
 4. [Sending for sequencing](#sending-for-sequencing)
 5. [Updating databases](#updating-databases)
 
@@ -167,7 +167,7 @@ The 'Ethanol storage' view is useful for this task.
 
 ***
 
-##  Extracting DNA/RNA
+##  Extracting DNA and RNA
 
 ### Materials
 - [ ] RNeasy PowerMicrobiome Kit (*check expiration dates*)
