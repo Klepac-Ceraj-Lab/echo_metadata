@@ -28,12 +28,22 @@ The sequencing facility will e-mail a dropbox link, such as
 The `?dl=1` at the end is important, if it's not there it can be added
 (or if it's `?dl=0`, change it to `?dl=1`).
 
-Log in to `rosalind` (the large Mac in the lab), and open the terminal app.
+Log in or `ssh` into `rosalind` (the large Mac in the lab), and open the
+terminal app. Start a new `tmux` session in your terminal window.
+
+```sh
+$ tmux new -s seq
+# seq = [name of session]
+# Re-attach to tmux session
+$ tmux a -t seq
+```
+
 Change the directory to the echo sequencing folder.
 
 ```sh
-$ cd /Volumes/G-DRIVE\ USB-C/ECHO/sequencing/
-$ cd mgx # (or 16S)
+$ cd /Volumes/franklin/echo/sequencing/
+$ cd mgx
+# (or 16S)
 ```
 
 To download, use the `curl` program.
@@ -41,9 +51,11 @@ Replace the url below with the one provided by the sequencing facility.
 
 NOTE: The file name below is just an example -
 use something more specific to prevent overwriting previous sequences.
+For batches split into multiple dropbox links, add `_#` to the file name,
+as shown below.
 
 ```sh
-$ curl -L -o nov2018.zip https://www.dropbox.com/s/52468hvj9cmcizq/RowlandMetaG.zip?dl=1
+$ curl -L -o nov2018_1.zip https://www.dropbox.com/s/52468hvj9cmcizq/RowlandMetaG.zip?dl=1
 ```
 
 You will see the download status displayed below the command.
@@ -55,8 +67,8 @@ The `unzip -l` command lists the contents of a zip archive,
 including files, their size/time of creation etc.
 
 ```sh
-$ unzip -l nov2018.zip
-Archive:  nov2018.zip
+$ unzip -l nov2018_1.zip
+Archive:  nov2018_1.zip
   Length      Date    Time    Name
 ---------  ---------- -----   ----
         0  01-10-2019 15:05   RowlandMetaG/
@@ -75,20 +87,22 @@ Archive:  nov2018.zip
 ```
 
 Makes sure that the correct number of files is present -
-there should be 8 files per sample (4 lanes each of forward and reverse).
+there should be 8 files per `mgx` sample (4 lanes each of forward and reverse).
 In this case, there were 66 samples, plus one "file" for the folder itself
 
 `66 samples x 2 x 4 lanes + 1 == 529`
+
+For `16S` samples, there should be 2 files per sample.
 
 ### Create `batch###_details.txt`
 
 Save the information from this output into a file called `batch###_details.txt`,
 where `###` is the batch number (eg `006`), and put it in the `details/` folder.
 
-_Note: if 16S samples, label 16S_batch###_
+_Note: if 16S samples, label 16S_batch###. If files were split into multiple dropbox links, add "_#" to end of file name, as shown below.
 
 ```sh
-$ unzip -l nov2018.zip > details/batch006_details.txt
+$ unzip -l nov2018_1.zip > details/batch006_details_1.txt
 ```
 
 ## Extract the `zip` file into its own folder

@@ -354,7 +354,7 @@ master_fecal_samples.csv
 # "NTM"
 rosalind:/Volumes/vkclab/echo/databases/
 # "Franklin"
-rosalind:/Volumes/franklin/ECHO/Databases/
+rosalind:/Volumes/franklin/echo/databases/
 # "Lovelace"
 ada:/lovelace/echo/databases/
 ...
@@ -362,6 +362,38 @@ master_fecal_samples.csv
 YYYYMMDD_deidentified.fmp12
 # Note: identifiable version of FileMaker Pro database CANNOT be put on NTM
 YYYYMMDD_identifiable.fmp12
+```
+
+### Weekly update to `master_fecal_samples.csv`
+
+1. Export `Master-Everything.csv` from AirTable.
+![alt text](~/gitrepos/echo_metadata/exportcsv.png)
+2. Move `Master-Everything.csv` into gitrepos/echo_metadata/
+```sh
+$ cd ~/gitrepos/echo_metadata/
+$ mv ~/Downloads/Master-Everything.csv ~/gitrepos/echo_metadata/master_fecal_samples.csv
+```
+3. Commit and push this weekly update to GitHub.
+```sh
+$ git status
+# Insert expected response
+$ git add master_fecal_samples.csv
+$ git status
+# Insert expected response
+$ git commit -m "weekly update"
+$ git status
+# Insert expected response
+$ git push
+```
+4. Click and drag `master_fecal_samples.csv` to `/Volumes/vkclab/echo/databases/`
+to add the updated version to ntm. _Note: replace the old version on ntm,
+do not keep both versions._
+5. Sync ntm with rosalind and franklin.
+```sh
+# requires ability to ssh into rosalind and ssh into ada from rosalind
+$ ssh rosalind
+$ rsync -avzP /Volumes/vkclab/echo/databases/ /Volumes/franklin/echo/databases/
+$ rsync -avzP /Volumes/vkclab/echo/databases/ ada:/lovelace/echo/databases/
 ```
 
 ***
