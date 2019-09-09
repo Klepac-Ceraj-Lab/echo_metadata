@@ -92,7 +92,7 @@ formatted to fit multiple pages of labels. Each sample label page fits
 
 Then open `samplelabel_template.docx` and copy each page individually into the
 template. Save each page of sample labels as `.docx` and `.pdf` file in the
-format `YYYY-MM-DD_fecal_#`. Once ready, print each **pdf** file of labels onto
+format `YYYYMMDD_fecal_#`. Once ready, print each **pdf** file of labels onto
 Tough Tags (Cat. No. ). Pages tend to stick to each other so load and print
 each page one-by-one. Label each printed page of labels with marker with date
 and #/total # pages.
@@ -119,6 +119,8 @@ YYYYMMDD_fecal_#.pdf
 - [ ] Marker
 - [ ] Sample labels (see above)
 - [ ] Biosafety cabinet
+- [ ] Gloves
+- [ ] Thermo gloves
 - [ ] 70% ethanol (for sterilization)
 - [ ] Paper towels
 - [ ] Small biohazardous waste bag
@@ -131,8 +133,9 @@ YYYYMMDD_fecal_#.pdf
 'Aliquoting' view. Filter by DOC such that only 16-32 samples are shown. Print
 this page for keeping track of samples and for recording all the information in
 your lab notebook.
-3. With full ice bucket, take selected samples out of -80C freezer. Arrange in
-same order as printed database page. Let defrost on ice.
+3. With full ice bucket, take selected samples out of -80C freezer. Use thermo
+gloves to protect your hands from the extreme cold. Arrange in same order as
+printed database page. Let defrost on ice.
 4. Clean inside of biosafety cabinet with 70% ethanol. Place pipette, tips, bag of
 cryovials, test tube rack, small tube rack, marker, and biohazardous waste bag in
 biosafety cabinet, wiping each item with ethanol in order to sterilize.
