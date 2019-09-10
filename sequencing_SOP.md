@@ -8,14 +8,14 @@ the following steps need to be taken:
   (the large Mac in the lab)
 - [ ] Document the contents of the `zip` file.
   - [ ] Create `batch###_details.txt`
-  - [ ] Create `batch###_files.txt`
 - [ ] Extract the `zip` file into its own folder
+  - [ ] Create `batch###_files.txt`
   - [ ] Create batch###.md5
 - [ ] Verify that there are no conflicting file names in
-  `ECHO/sequencing/mgx/rawfastq`
+  `echo/sequencing/mgx/rawfastq`
 - [ ] Verify that all samples included in batch have correct
-  number of files (usually 8; 4 lanes each of fwd and rev)
-- [ ] Move files into `ECHO/sequencing/mgx/rawfastq`
+  number of files (usually 8 for mgx; 4 lanes each of fwd and rev)
+- [ ] Move files into `echo/sequencing/mgx/rawfastq`
 - [ ] Copy files to NTM
 
 **NOTE:** If the sequencing center sends multiple links for a sigle batch,
@@ -119,6 +119,8 @@ Once this is finished, check to make sure that all of the files were extracted.
 The result of `ls -l RowlandMetaG` (or whatever folder they were extracted into),
 especially at the end, should match the content of the `_details.txt` file.
 
+_Note: folder names can be determined from the original dropbox link_
+
 for example
 
 ```sh
@@ -149,7 +151,7 @@ $ ls RowlandMetaG/*.fastq.gz | wc -l
 
 We also want a file that contains only the file names,
 so if we ever need the files from a single batch in the future,
-we can easily get them.
+we can easily get them. For batches split into multiple folders, make only **one** `batch###_files.txt` for the batch.
 
 _Note: if 16S samples, label 16S_batch###_
 
@@ -166,26 +168,26 @@ C0047-7F-1A_S9_L003_R1_001.fastq.gz
 Now pipe the results of this command to a file called `batch###_files.txt`.
 
 ```sh
-$ ls RowlandMetaG | grep fastq.gz > batch006_files.txt
+$ ls RowlandMetaG | grep fastq.gz >> batch006_files.txt
 ```
 
 ### Create batch###.md5
 
 To reduce the overhead of checking the integrity of these files in the future,
 we'll use `md5sum` which creates a hash of the file contents
-(note - this may also take a while).
+(note - this may also take a while). Create a `.md5` for each part of a batch.
 
 _Note: if 16S samples, label 16S_batch###_
 
 ```sh
-$ cd RowlandMetaG
-$ md5sum *.fastq.gz > ../details/batch006.md5
+$ cd RowlandMetaG_1
+$ md5sum *.fastq.gz > ../details/batch006_1.md5
 ```
 
 Which looks like this:
 
 ```sh
-$ head -5 ../details/batch006.md5
+$ head -5 ../details/batch006_1.md5
 66f8abc4a71d7ed945ae6a487629816c  C0047-7F-1A_S9_L001_R1_001.fastq.gz
 68801cafb15d7993e7542e1c7e152147  C0047-7F-1A_S9_L001_R2_001.fastq.gz
 292b2ed5a70872b536997bace2ed4b89  C0047-7F-1A_S9_L002_R1_001.fastq.gz
@@ -193,25 +195,31 @@ $ head -5 ../details/batch006.md5
 a98e4c376a5b5bcbaadb8a7fb5f3c3f5  C0047-7F-1A_S9_L003_R1_001.fastq.gz
 ```
 
-## Verify that there are no conflicting file names in `ECHO/sequencing/mgx/rawfastq` or `ECHO/sequencing/16S/rawfastq`
+## Verify that there are no conflicting file names in `echo/sequencing/mgx/rawfastq` or `echo/sequencing/16S/rawfastq`
 
 ```sh
 $ cd ..
-$ for f in $(ls RowlandMetaG); do if [ -f rawfastq/$f ]; then echo "$f already exists"; fi; done
+$ for f in $(cat batch006_files.txt); do if [ -f rawfastq/$f ]; then echo "$f already exists"; fi; done
 ```
 
-## Move files into `ECHO/sequencing/mgx/rawfastq`
+## Move files into `echo/sequencing/mgx/rawfastq`
 
 ```sh
 $ mv -nv RowlandMetaG/* rawfastq/
 ```
 
-## Copy Files to NTM
+## Rsync files to lovelace and ntm
 
-Assuming the lab drive on NTM is mounted
+Assuming the lab drive on NTM is mounted and can ssh into `ada` from `rosalind`.
+
+_Note: Run this in a tmux window_
 
 ```
-$ rsync -avzP ./ /Volumes/vkclab/ECHO/sequencing/mgx/
+# From rosalind, franklin to lovelace
+$ rsync -avzP /Volumes/franklin/echo/sequencing/mgx/ ada:/lovelace/echo/sequencing/mgx/
+
+# From rosalind, franklin to ntm
+$ rsync -avzP /Volumes/franklin/echo/sequencing/mgx/ /Volumes/vkclab/echo/sequencing/mgx/
 ```
 
 ## Handling multiple dropbox links in a single batch.
