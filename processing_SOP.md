@@ -94,8 +94,8 @@ Then open `samplelabel_template.docx` and copy each page individually into the
 template. Save each page of sample labels as `.docx` and `.pdf` file in the
 format `YYYYMMDD_fecal_#`. Once ready, print each **pdf** file of labels onto
 Tough Tags (Cat. No. ). Pages tend to stick to each other so load and print
-each page one-by-one. Label each printed page of labels with marker with date
-and #/total # pages.
+each page one-by-one. Pages should be loaded label side down.
+Label each printed page of labels with marker with date and #/total # pages.
 
 ```
 # relevant file paths on Google Drive
@@ -126,16 +126,17 @@ YYYYMMDD_fecal_#.pdf
 - [ ] Small biohazardous waste bag
 - [ ] Ice bucket
 - [ ] Ice
+- [ ] Gloves
 
 1. Turn on blower and light in biosafety cabinet and open sash. Let air flow for
-3-15 mins, depending on particular model.
+3-15 mins, depending on particular model (see instructions on hood).
 2. Go to 'master_fecal_samples' base on AirTable. Open 'Master' table,
 'Aliquoting' view. Filter by DOC such that only 16-32 samples are shown. Print
 this page for keeping track of samples and for recording all the information in
 your lab notebook.
 3. With full ice bucket, take selected samples out of -80C freezer. Use thermo
 gloves to protect your hands from the extreme cold. Arrange in same order as
-printed database page. Let defrost on ice.
+printed database page. Let defrost on ice for about 10 minutes.
 4. Clean inside of biosafety cabinet with 70% ethanol. Place pipette, tips, bag of
 cryovials, test tube rack, small tube rack, marker, and biohazardous waste bag in
 biosafety cabinet, wiping each item with ethanol in order to sterilize.
@@ -145,8 +146,18 @@ with SampleID.
 7. Pipette 1000 ul of each sample into each cryovial.  
   - *Note:* this does not have to be exact. It is recommended to set pipette to
   900 ul to avoid fecal sample touching filter at top of pipette tip.
+  - Shake each sample tube before aliquoting to fully homogenize.
   - Make any notes about unusual samples or inconsistencies between the fecal
   sample database and the label on the OMNIgene Gut tube.
+  - If you encounter a difficult sample to pipette, here are some tips:
+      - Shake sample tube vigorously until ball inside can move relatively freely.
+      - Hit tube on bottom surface of the hood in order to get as much sample as
+      possible to collect in bottom of the tube.
+      - If sample is stuck in pipette tip, hit tip on bottom of cryovial a few times.
+      This makes the sample fall down and fill in any holes that air might be escaping
+      through, instead of pushing the sample.
+      - Pipette sample out slowly to prevent pushing the sample to the sides of the
+      tip, creating holes for air to pass through.
 8. When all samples are aliquoted, put aliquots on ice. If all sample tube labels
 have been double checked, they can be thrown in the biohazardous waste bag.
   - It is recommended to dispose of the biohazardous waste bag into a larger
@@ -216,38 +227,63 @@ The 'Ethanol storage' view is useful for this task.
 
 ### Protocol
 1. Turn on heat block (set to 55 degrees Celsius), centrifuge, PowerLyzer, and Qiacube
-Connect. UV treat Qiacube Connect.
-2. Sterilize work bench with ethanol and RNase Zap. Light bunsen burner. Remove samples from
--80 freezer and put on ice. Label top of aliquot tube with extraction number.
+Connect. UV treat Qiacube Connect (takes 12 minutes).
+  - _Note:_ Remove plastic before running UV treatment. This includes the shaker
+  tube holder and the reagent rack. Pipette tips can remain in the Qiacube.
+  - *DO NOT* open waste drawer while UV treatment is running.
+  - Qiacube Connect login
+      - User: Admin
+      - Password: Admin
+2. Sterilize work bench with ethanol and RNase Zap. Light bunsen burner. Remove
+samples from -80 freezer and put on ice. Label top of aliquot tube with extraction number.
 3. Make PM1 and beta-mercaptoethanol mixture in the 15 ml tube. Heat for 5-10 minutes
 at 55 degrees Celsius.
  - *Note*: if running a full round (12 samples), use the following calculations.
  ```
  # n=12, 700 ul/n, 10 ul BME/990 ul PM1
  # BME: 84 ul
- # PM1: 8316 ul (8 ml + 316 ul)
+ # PM1: 8316 ul
+ #     (8 ml + 316 ul)
  ```
 4. While the mixture is heating, prep sample tubes (1 of each kind per sample).
 Label top of tubes with number of the sample in the round (ie 1-12).
-5. Load 650 ul of PM1/BME mixture into each Powerbead tube. Then add 200 ul of each sample using
-wide orifice pipette tips to each respective Powerbead tube.
+5. Load 650 ul of PM1/BME mixture into each Powerbead tube. Then add 200 ul of each
+sample using wide orifice pipette tips to each respective Powerbead tube.
   - *Note*: if including a negative control, use 200 ul of PM1/BME instead of sample.
   - *Tip*: if fecal sample is stuck in pipette, pipette up and down a few times with
   PM1/BME mixture in individual Powerbead tube to loosen the sample.
 6. Lyse samples on PowerLyzer 2500 speed for 45 seconds. Centrifuge for 1 minute at RT at
 13,000 x g.
-7. While samples are shaking and spinning, load rotor adaptors onto tray. Then place
+  - _Note:_ PowerLyzer needs to balanced 4 ways, not 2 like a centrifuge.
+7. Load protocol on Qiacube Connect.
+  - Should be saved on home screen as `RNA-RNeasy PowerMicrobiome-Stool or biosolid-
+  IRT-12`
+  - To find otherwise you can...
+      1. Scan code on kit, choose `IRT`, enter elution volume and number of samples
+      2. Go to `RNA` -> `RNeasy PowerMicrobiome` -> `Stool or biosolid` -> `IRT`
+      and then enter elution volume, and number of samples
+  - Elution volume for batch001-batch012 = 60 ul
+  - Elution volume for batch013+ = **100 ul**
+8. While samples are shaking and spinning, load rotor adaptors onto tray. Then place
 spin columns and elution tubes into proper places on rotor adaptors (consult Qiacube for
   details).
-8. Transfer 450 ul of supernatant to rotor adaptors as instructed by Qiacube.
-9. Load samples and supplies into Qiacube as instructed on screen.
-10. Run protocol on Qiacube Connect.
-11. When round finished, empty waste drawer. Take out reagents and unused pipette tips.
-Carefully remove elution tubes from rotor adaptors. Discard of other tubes and plastic ware
-in chemical waste for beta-mercaptoethanol waste.
-12. Label extracted DNA and RNA from samples and store in proper 2" cryobox in -80 freezer.
-13. Record extraction progress and any notes from the protocol in Airtable (see [Updating databases] (#updating-databases)
-below for more details).
+9. Transfer 450 ul of supernatant to rotor adaptors as instructed by Qiacube.
+10. Load samples and supplies into Qiacube as instructed on screen.
+11. Run protocol on Qiacube Connect.
+  - Make sure enough of each reagent is loaded
+  - Make sure to take caps off reagent bottles and place to the side inside the Qiacube
+  - Make sure waste drawer has been emptied from previous
+12. When round finished, empty waste drawer into biohazardous waste. Take out reagents.
+Carefully remove elution tubes from rotor adaptors and place aside. Discard of other
+ tubes and plastic ware in chemical waste for beta-mercaptoethanol waste, located in
+ chemical hood.
+13. Ethanol inside of Qiacube and then UV treat.
+  - As above, make sure to remove all hard plastics (i.e. shaker tube holder, reagent
+    rack) from Qiacube before UV treatment.
+14. Label extracted DNA and RNA from samples and store in proper 2" cryobox in
+-80 freezer.
+15. Record extraction progress and any notes from the protocol in Airtable (see [Updating
+  databases] (#updating-databases) below for more details).
 
 ***
 
@@ -367,7 +403,7 @@ YYYYMMDD_identifiable.fmp12
 ### Weekly update to `master_fecal_samples.csv`
 
 1. Export `Master-Everything.csv` from AirTable.
-![alt text](~/gitrepos/echo_metadata/exportcsv.png)
+![alt text](exportcsv.png)
 2. Move `Master-Everything.csv` into gitrepos/echo_metadata/
 ```sh
 $ cd ~/gitrepos/echo_metadata/
@@ -376,13 +412,8 @@ $ mv ~/Downloads/Master-Everything.csv ~/gitrepos/echo_metadata/master_fecal_sam
 3. Commit and push this weekly update to GitHub.
 ```sh
 $ git status
-# Insert expected response
 $ git add master_fecal_samples.csv
-$ git status
-# Insert expected response
 $ git commit -m "weekly update"
-$ git status
-# Insert expected response
 $ git push
 ```
 4. Click and drag `master_fecal_samples.csv` to `/Volumes/vkclab/echo/databases/`
@@ -401,21 +432,143 @@ $ rsync -avzP /Volumes/vkclab/echo/databases/ ada:/lovelace/echo/databases/
 ### master_fecal_samples AirTable base overview
 #### Tables
 ##### Master
+This is the main table you will use and the one to which the others are connected.
+
 ###### Everything
+This is the default view. Everything is visible and it is always sorted as such:
+
+Sort by DOC from 1 -> 9
+
+then by SubjectID from A -> Z
+
+[x] Keep sorted
+
+**If you change these settings, DO NOT FORGET to reset them as they affect the
+sorting on all other views**
+
 ###### Aliquoting
+Use this view when preparing to [aliquot](#aliquoting-protocol).
+The default settings as follows:
+
+Sorted same as `Everything`
+
+Filters:
+  1. Where Date_Aliquoted is empty
+  2. And Fecal_EtOH is F
+  3. And CollectionRep is 1
+
+Columns shown:
+    1. SampleID
+      - Unique ID for this sample generated for when it is sent for sequencing.
+    2. DOC
+      - Date of collection
+    3. Date_Aliquoted
+      - When done [aliquoting](#aliquoting-protocol), filter so only the samples
+      you aliquoted are selected, and then batch update the `Date_Aliquoted` to the
+      correct date.
+    4. Number_Replicates
+      - How many aliquots are you making?
+      - Should generally be 2 (A, B)
+        - Older samples were divided into 4 aliquots (A, B, C, D)
+    5. RAInitials_Aliquoted
+      - Initials of whoever aliquoted the samples
+    6. StorageBox
+      - Which cryobox can the aliquots be found?
+    7. Notes
+      - Any miscellaneous notes
+
+**If you edit these settings, remember to restore the view to default settings.**
+
 ###### Extracting
+Use this view when prepping samples for [extractions](#extracting-dna-and-rna)
+
+Sorted same as `Everything`
+
+Filters:
+
+
+Columns shown:
+
+
+**If you edit these settings, remember to restore the view to default settings.**
+
 ###### Sequencing
+Use this view when prepping to send samples for [sequencing](#sending-for-sequencing).
+
+Sorted same as `Everything`
+
+Filters:
+
+
+Columns shown:
+
+
+**If you edit these settings, remember to restore the view to default settings.**
+
 ###### Inputting new samples
+Add new samples to the database using this view.
+
+Filters:
+  1. Where DOC is within the past 100 days
+  2. Or DOC is empty
+
+Columns shown:
+  1. SampleID
+  2. Mother_Child
+  3. SubjectID
+  4. MaternalID
+  5. TimePoint
+  6. Fecal_EtOH
+  7. CollectionRep
+  8. DOC
+  9. RAInitials_DOC
+  10. DOF
+  11. RAInitials_DOF
+  12. Date_Brought_In
+  13. RAInitials_Brought
+  14. Date_Shipped
+  15. RAInitials_Shipped
+  16. Notes
+
+**If you edit these settings, remember to restore the view to default settings.**
+
 ###### Samples by SubjectID
+Use this view for seeing how many samples are connected to each SubjectID.
+
+Grouped by `SubjectID`
+
+Columns shown:
+  1. SampleID
+  2. Mother_Child
+  3. MaternalID
+    - In most cases, this is the same as `SubjectID` *except in cases of __twins__*.
+  4. MC_Dyads
+  5. DOC
+  6. Date_Aliquoted
+  7. StorageBox
+  8. DOE
+  9. DNABox
+  10. DOM
+  11. Mgx_sequenced
+  12. Mgx_batch
+  13. D016S
+  14. 16S_sequenced
+  15. 16S_batch
+  16. Notes
 
 ##### Batch 1 Mapping
+This table is for converting batch001 sampleIDs into the current naming convention
+for SampleIDs.
+
 ##### Mgx_batch Mapping
+This table records which SampleIDs are in each batch sent for mgx sequencing.
+
 ##### 16S_batch Mapping
+This table records which SampleIDs are in each batch sent for 16S sequencing.
+
 ##### Mother_Child Dyads
 
 This table is to record the number of mother child pairs (or trios, in the case
-of twins). This table is populated by using the
-
-#### Blocks
-
-###
+of twins). This table is populated by using the `Samples by SubjectID` view and
+manually adding any samples that have been sequenced from SubjectIDs that include
+samples from both mothers and children.
