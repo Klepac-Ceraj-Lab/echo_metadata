@@ -403,7 +403,9 @@ YYYYMMDD_identifiable.fmp12
 ### Weekly update to `master_fecal_samples.csv`
 
 1. Export `Master-Everything.csv` from AirTable.
-![alt text](exportcsv.png)
+
+![export csv](exportcsv.png)
+
 2. Move `Master-Everything.csv` into gitrepos/echo_metadata/
 ```sh
 $ cd ~/gitrepos/echo_metadata/
@@ -485,10 +487,26 @@ Use this view when prepping samples for [extractions](#extracting-dna-and-rna)
 Sorted same as `Everything`
 
 Filters:
-
+  1. Where Date_Aliquoted is not empty
+  2. And DOE is empty
+  3. And Fecal_EtOH is F
+  4. And CollectionRep is 1
 
 Columns shown:
-
+  1. SampleID
+  2. Date_Aliquoted
+    - Recommend hiding when printing list of samples to be extracted
+  3. StorageBox
+  4. DOE
+  5. Extract_number
+  6. Aliquot_Rep
+      - Recommend hiding when printing list of samples to be extracted
+  7. DNABox
+  8. KitUsed
+      - Recommend hiding when printing list of samples to be extracted
+  9. RAInitials_Extract
+      - Recommend hiding when printing list of samples to be extracted
+  10. Notes
 
 **If you edit these settings, remember to restore the view to default settings.**
 
@@ -498,10 +516,26 @@ Use this view when prepping to send samples for [sequencing](#sending-for-sequen
 Sorted same as `Everything`
 
 Filters:
-
+  1. Where DOE is not empty
+  2. And DOM is empty
 
 Columns shown:
-
+  1. SampleID
+  2. DOC
+  3. DOE
+  4. Extract_number
+  5. DNABox
+  6. RAInitials_Extract
+  7. DNAConc
+  8. DOM
+  9. Mgx_processed
+  10. Mgx_batch
+  11. Mgx_batch Mapping
+  12. DO16S
+  13. 16S_processed
+  14. 16S_batch
+  15. 16S_plate
+  16. Notes
 
 **If you edit these settings, remember to restore the view to default settings.**
 
@@ -549,10 +583,10 @@ Columns shown:
   8. DOE
   9. DNABox
   10. DOM
-  11. Mgx_sequenced
+  11. Mgx_processed
   12. Mgx_batch
   13. D016S
-  14. 16S_sequenced
+  14. 16S_processed
   15. 16S_batch
   16. Notes
 
