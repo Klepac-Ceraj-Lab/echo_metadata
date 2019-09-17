@@ -1,0 +1,29 @@
+# Cleaning up, organizing, and archiving in the `echo` drives
+
+```sh
+# external echo drive map
+## same across all drives (ntm, franklin, lovelace)
+echo/
+  analysis/
+    biobakery/
+    engaging/
+    gutbrain/
+  attic/
+    analysis/
+    databases/
+    sequencing/
+  databases/
+    master_fecal_samples.csv
+    YYYYMMDD_deidentified.fmp12
+  sequencing/
+    16S/
+    mgx/
+      batch###_files.txt
+      details/
+        batch###.md5
+        batch###_details.txt
+      rawfastq/
+      submissions/
+        YYYYMMDD_batch###_mgx.xlsx
+    mgx-old/
+```
