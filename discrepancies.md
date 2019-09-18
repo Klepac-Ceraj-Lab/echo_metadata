@@ -325,3 +325,78 @@ IMR_May2018/C0634-1F-1A_S33_L004_R2_001.fastq.gz -> IMR_May2018/C0634-1F-3A_S33_
 $ rsync -avzP --exclude='*.zip' mgx /Volumes/vkclab/ECHO/sequencing/
 
 ```  
+
+## Changes made on Sept 18, 2019
+
+C1008-3F-1A -> C1008-4F-1A
+* Changing from timepoint 3 to timepoint 4
+* file in `batch011`
+
+```sh
+$ cd mgx/
+
+# Find the files
+$ find RowlandRunNS43*/*.fastq.gz | grep C1008-3F-1A
+
+RowlandRunNS43_part3/C1008-3F-1A_S95_L001_R2_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L002_R1_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L002_R2_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L003_R1_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L003_R2_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L004_R1_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L004_R2_001.fastq.gz
+
+# Test code
+$ for f in $(find RowlandRunNS43*/*.gz | grep C1008-3F-1A); do
+    echo "mv -v $f ${f/-3F-1A/-4F-1A}"
+  done
+
+  mv -v RowlandRunNS43_part3/C1008-3F-1A_S95_L001_R1_001.fastq.gz RowlandRunNS43_part3/C1008-4F-1A_S95_L001_R1_001.fastq.gz
+  mv -v RowlandRunNS43_part3/C1008-3F-1A_S95_L001_R2_001.fastq.gz RowlandRunNS43_part3/C1008-4F-1A_S95_L001_R2_001.fastq.gz
+  mv -v RowlandRunNS43_part3/C1008-3F-1A_S95_L002_R1_001.fastq.gz RowlandRunNS43_part3/C1008-4F-1A_S95_L002_R1_001.fastq.gz
+  mv -v RowlandRunNS43_part3/C1008-3F-1A_S95_L002_R2_001.fastq.gz RowlandRunNS43_part3/C1008-4F-1A_S95_L002_R2_001.fastq.gz
+  mv -v RowlandRunNS43_part3/C1008-3F-1A_S95_L003_R1_001.fastq.gz RowlandRunNS43_part3/C1008-4F-1A_S95_L003_R1_001.fastq.gz
+  mv -v RowlandRunNS43_part3/C1008-3F-1A_S95_L003_R2_001.fastq.gz RowlandRunNS43_part3/C1008-4F-1A_S95_L003_R2_001.fastq.gz
+  mv -v RowlandRunNS43_part3/C1008-3F-1A_S95_L004_R1_001.fastq.gz RowlandRunNS43_part3/C1008-4F-1A_S95_L004_R1_001.fastq.gz
+  mv -v RowlandRunNS43_part3/C1008-3F-1A_S95_L004_R2_001.fastq.gz RowlandRunNS43_part3/C1008-4F-1A_S95_L004_R2_001.fastq.gz
+
+#Run code
+$ for f in $(find RowlandRunNS43*/*.gz | grep C1008-3F-1A); do
+    mv -v $f ${f/-3F-1A/-4F-1A}
+  done
+
+  RowlandRunNS43_part3/C1008-3F-1A_S95_L001_R1_001.fastq.gz -> RowlandRunNS43_part3/C1008-4F-1A_S95_L001_R1_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L001_R2_001.fastq.gz -> RowlandRunNS43_part3/C1008-4F-1A_S95_L001_R2_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L002_R1_001.fastq.gz -> RowlandRunNS43_part3/C1008-4F-1A_S95_L002_R1_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L002_R2_001.fastq.gz -> RowlandRunNS43_part3/C1008-4F-1A_S95_L002_R2_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L003_R1_001.fastq.gz -> RowlandRunNS43_part3/C1008-4F-1A_S95_L003_R1_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L003_R2_001.fastq.gz -> RowlandRunNS43_part3/C1008-4F-1A_S95_L003_R2_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L004_R1_001.fastq.gz -> RowlandRunNS43_part3/C1008-4F-1A_S95_L004_R1_001.fastq.gz
+RowlandRunNS43_part3/C1008-3F-1A_S95_L004_R2_001.fastq.gz -> RowlandRunNS43_part3/C1008-4F-1A_S95_L004_R2_001.fastq.gz
+
+# Correction made upstream of `files.txt` and `.md5` files
+# but downstream of `batch011_details_3.txt`
+
+# Correcting batch011_details_3.txt
+$ sed -Ei.bak 's/C1008-3F-1A/C1008-4F-1A/' batch011_details_3.txt
+
+diff batch011_details_3.txt batch011_details_3.txt.bak
+13,20c13,20
+<  80491004  09-16-2019 16:23   RowlandRunNS43_part3/C1008-4F-1A_S95_L001_R1_001.fastq.gz
+<  82367890  09-16-2019 16:24   RowlandRunNS43_part3/C1008-4F-1A_S95_L001_R2_001.fastq.gz
+<  79960916  09-16-2019 16:23   RowlandRunNS43_part3/C1008-4F-1A_S95_L002_R1_001.fastq.gz
+<  81660917  09-16-2019 16:23   RowlandRunNS43_part3/C1008-4F-1A_S95_L002_R2_001.fastq.gz
+<  82320735  09-16-2019 16:24   RowlandRunNS43_part3/C1008-4F-1A_S95_L003_R1_001.fastq.gz
+<  84123317  09-16-2019 16:24   RowlandRunNS43_part3/C1008-4F-1A_S95_L003_R2_001.fastq.gz
+<  79820352  09-16-2019 16:23   RowlandRunNS43_part3/C1008-4F-1A_S95_L004_R1_001.fastq.gz
+<  81716033  09-16-2019 16:23   RowlandRunNS43_part3/C1008-4F-1A_S95_L004_R2_001.fastq.gz
+---
+>  80491004  09-16-2019 16:23   RowlandRunNS43_part3/C1008-3F-1A_S95_L001_R1_001.fastq.gz
+>  82367890  09-16-2019 16:24   RowlandRunNS43_part3/C1008-3F-1A_S95_L001_R2_001.fastq.gz
+>  79960916  09-16-2019 16:23   RowlandRunNS43_part3/C1008-3F-1A_S95_L002_R1_001.fastq.gz
+>  81660917  09-16-2019 16:23   RowlandRunNS43_part3/C1008-3F-1A_S95_L002_R2_001.fastq.gz
+>  82320735  09-16-2019 16:24   RowlandRunNS43_part3/C1008-3F-1A_S95_L003_R1_001.fastq.gz
+>  84123317  09-16-2019 16:24   RowlandRunNS43_part3/C1008-3F-1A_S95_L003_R2_001.fastq.gz
+>  79820352  09-16-2019 16:23   RowlandRunNS43_part3/C1008-3F-1A_S95_L004_R1_001.fastq.gz
+>  81716033  09-16-2019 16:23   RowlandRunNS43_part3/C1008-3F-1A_S95_L004_R2_001.fastq.gz
+```
