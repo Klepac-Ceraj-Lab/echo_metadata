@@ -4,19 +4,19 @@ When an e-mail comes in from the sequencing facility
 indicating that raw seqences are ready,
 the following steps need to be taken:
 
-- [ ] Download the `zip` file from dropbox to the G-Drive attached to `rosalind`
+- [ ] [Download the `zip` file](#download-the-zip-file-from-dropbox-to-the-g-drive-attached-to-rosalind) from dropbox to the G-Drive attached to `rosalind`
   (the large Mac in the lab)
-- [ ] Document the contents of the `zip` file.
-  - [ ] Create `batch###_details.txt`
-- [ ] Extract the `zip` file into its own folder
-  - [ ] Create `batch###_files.txt`
-  - [ ] Create batch###.md5
-- [ ] Verify that there are no conflicting file names in
-  `echo/sequencing/mgx/rawfastq`
+- [ ] [Document the contents of the `zip` file](#document-the-contents-of-the-zip-file)
+  - [ ] [Create `batch###_details.txt`](#create-batch###_details.txt)
+- [ ] [Extract the `zip` file into its own folder](#extract-the-zip-file-into-its-own-folder)
+  - [ ] [Create `batch###_files.txt`](#create-batch###_files.txt)
+  - [ ] [Create batch###.md5](#create-batch###.md5)
+- [ ] [Verify that there are no conflicting file names](#verify-that-there-are-no-conflicting-file-names-in-echo-sequencing-mgx-rawfastq-or-echo-sequencing-16S-rawfastq) in
+  `echo/sequencing/mgx/rawfastq` or `echo/sequencing/16S/rawfastq`
 - [ ] Verify that all samples included in batch have correct
   number of files (usually 8 for mgx; 4 lanes each of fwd and rev)
-- [ ] Move files into `echo/sequencing/mgx/rawfastq`
-- [ ] Copy files to NTM
+- [ ] [Move files into `echo/sequencing/mgx/rawfastq`](#move-files-into-echo-sequencing-mgx-rawfastq)
+- [ ] [Rsync files to lovelace and ntm](#rsync-files-to-lovelace-and-ntm)
 
 **NOTE:** If the sequencing center sends multiple links for a sigle batch,
 See bottom of this page for special notes.
