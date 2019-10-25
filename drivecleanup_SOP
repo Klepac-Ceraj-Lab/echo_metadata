@@ -312,3 +312,73 @@ rmdir: failed to remove 'RowlandMetaG': Directory not empty
 rmdir: failed to remove 'RowlandRunNS39-remainder': Directory not empty
 $ ls Rowland*
 ```
+
+What still remains? What can be removed? (Oct 25 2019)
+
+```sh
+$ ls -l
+total 1456
+-rwxrwxr-x 1 sophie sophie      165 Jul 27  2018 '~$IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx'
+-rwxrwxr-x 1 sophie sophie    23608 Apr 20  2019  batch001_files.txt
+-rwxrwxr-x 1 sophie sophie    28048 Apr 20  2019  batch002_files.txt
+-rwxrwxr-x 1 sophie sophie    22424 Apr 20  2019  batch003_files.txt
+-rwxrwxr-x 1 sophie sophie    17992 Apr 23  2019  batch004_files.txt
+-rwxrwxr-x 1 sophie sophie    28344 Apr 18  2019  batch005_files.txt
+-rwxrwxr-x 1 sophie sophie    19464 Jan 19  2019  batch006_files.txt
+-rwxrwxr-x 1 sophie sophie    19168 Mar 12  2019  batch007_files.txt
+-rwxrwxr-x 1 sophie sophie    28344 Apr  5  2019  batch008_files.txt
+drwxrwxr-x 4 kevin  kevin      4096 May 28 10:15  batch009
+-rwxrwxr-x 1 sophie sophie    38336 Jun  4 13:29  batch009_files.txt
+drwxrwxr-x 8 kevin  facstaff   4096 Sep 10 13:22  batch010
+-rw-r--r-- 1 sophie facstaff  28344 Sep 10 09:32  batch010_files.txt
+-rw-r--r-- 1 sophie facstaff  28344 Sep 18 17:11  batch011_files.txt
+-rw-r--r-- 1 sophie facstaff  28352 Oct 22 10:51  batch012_files.txt
+drwxrwxr-x 2 sophie sophie     4096 Oct 22 12:40  details
+-rwxrwxr-x 1 sophie sophie     5865 Jul 26  2018  ECHO_May2018_mapping.txt
+-rwxrwxr-x 1 sophie sophie    16306 Jul 26  2018  ECHO_May2018_mapping.xlsx
+-rwxrwxr-x 1 sophie sophie   261114 Jul 18  2018 'February 2018 Illumina & Metagenome Sequencing.xlsx'
+-rwxrwxr-x 1 sophie sophie    35359 Jul 18  2018 'IMR-SampleSubmissionSheet_v8(Rowland_Feb20).xlsx'
+-rwxrwxr-x 1 sophie sophie    38317 Jul 18  2018 'IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx'
+-rwxrwxr-x 1 sophie sophie      296 Apr 23  2019  missing.txt
+-rw-rw-r-- 1 kevin  kevin     71624 Aug 13 10:10  mothers_fastq.txt
+-rwxrwxr-x 1 sophie sophie     1184 Apr 23  2019  nobatch.txt
+-rw-r--r-- 1 sophie facstaff   4696 Sep 10 11:58  p1.txt
+drwxrwxr-x 2 sophie sophie   536576 Oct 22 13:56  rawfastq
+-rwxrwxr-x 1 sophie sophie    68280 Jan 28  2019  rawfastq_batch005.txt
+-rwxrwxr-x 1 sophie sophie      354 May 30  2018  README.rtf
+drwxrwxr-x 3 sophie sophie    57344 Jan 22  2019  RowlandMetaG
+drwxr-xr-x 3 root   root      20480 May 30 16:23  RowlandRunNS39-remainder
+drwx------ 2 sophie facstaff   4096 Aug 28 12:27  submissions
+```
+
+There are 4 folders with a lot of data that we don't expect to be here.
+
+```
+/lovelace/echo/sequencing/mgx/
+# Folders we want
+details/
+rawfastq/
+submissions/
+# Folders we don't want
+RowlandMetaG/
+RowlandRunNS39-remainder/
+batch009/
+batch010/
+```
+
+All these folders seem to have rawfastq files which should already be saved in `mgx/rawfastq/`
+but let's double check before we delete important sequencing data.
+
+```sh
+$ ls RowlandMetaG/ >> rmg.txt
+$ ls RowlandRunNS39-remainder/ >> rmg.txt
+$ ls batch009/rawfastq/ >> rmg.txt
+$ ls batch010/RowlandRunNS42_part1 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part2 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part3 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part4 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part5 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part6 >> rmg.txt
+
+$ for f in `cat rmg.txt`; do if [ ! -f rawfastq/$f ]; then echo "$f is missing"; fi done
+```
