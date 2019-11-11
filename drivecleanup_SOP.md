@@ -1,0 +1,384 @@
+# Cleaning up, organizing, and archiving in the `echo` drives
+
+```sh
+# external echo drive map
+## same across all drives (ntm, franklin, lovelace)
+echo/
+  analysis/
+    biobakery/
+    engaging/
+    gutbrain/
+  attic/
+    analysis/
+    databases/
+    sequencing/
+  databases/
+    master_fecal_samples.csv
+    YYYYMMDD_deidentified.fmp12
+  sequencing/
+    16S/
+    mgx/
+      batch###_files.txt
+      details/
+        batch###.md5
+        batch###_details.txt
+      rawfastq/
+      submissions/
+        YYYYMMDD_batch###_mgx.xlsx
+    mgx-old/
+```
+
+## Cleaning /lovelace/echo/sequencing/mgx/ (Oct 24, 2019)
+
+```sh
+$ ssh ada
+$ cd /lovelace/echo/sequencing/mgx/
+$ ls -l
+total 697088792
+-rwxrwxr-x 1 sophie sophie           165 Jul 27  2018 '~$IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx'
+-rwxrwxr-x 1 sophie sophie   75492823670 Jan 21  2019  apr2018.zip
+-rw-r--r-- 1 sophie facstaff 14698942886 Sep  9 13:57  aug2019_1.zip
+-rw-r--r-- 1 sophie facstaff 15517466965 Sep  9 14:17  aug2019_2.zip
+-rw-r--r-- 1 sophie facstaff 17692116315 Sep  9 14:06  aug2019_3.zip
+-rw-r--r-- 1 sophie facstaff 14474183863 Sep  9 14:03  aug2019_4.zip
+-rw-r--r-- 1 sophie facstaff 16998573493 Sep  9 14:13  aug2019_5.zip
+-rw-r--r-- 1 sophie facstaff 15055872754 Sep  9 14:18  aug2019_6.zip
+-rwxrwxr-x 1 sophie sophie         23608 Apr 20  2019  batch001_files.txt
+-rwxrwxr-x 1 sophie sophie         28048 Apr 20  2019  batch002_files.txt
+-rwxrwxr-x 1 sophie sophie         22424 Apr 20  2019  batch003_files.txt
+-rwxrwxr-x 1 sophie sophie         17992 Apr 23  2019  batch004_files.txt
+-rwxrwxr-x 1 sophie sophie         28344 Apr 18  2019  batch005_files.txt
+-rwxrwxr-x 1 sophie sophie         19464 Jan 19  2019  batch006_files.txt
+-rwxrwxr-x 1 sophie sophie         19168 Mar 12  2019  batch007_files.txt
+-rwxrwxr-x 1 sophie sophie         28344 Apr  5  2019  batch008_files.txt
+drwxrwxr-x 4 kevin  kevin           4096 May 28 10:15  batch009
+-rw-rw-r-- 1 root   root     35844182939 May 30 19:02  batch009.2.zip
+-rwxrwxr-x 1 sophie sophie         38336 Jun  4 13:29  batch009_files.txt
+drwxrwxr-x 8 kevin  facstaff        4096 Sep 10 13:22  batch010
+-rw-r--r-- 1 sophie facstaff       28344 Sep 10 09:32  batch010_files.txt
+-rw-r--r-- 1 sophie facstaff       28344 Sep 18 17:11  batch011_files.txt
+-rw-r--r-- 1 sophie facstaff       28352 Oct 22 10:51  batch012_files.txt
+-rwxrwxr-x 1 sophie sophie   25085043521 Mar 12  2019  dec2018_1.zip
+-rwxrwxr-x 1 sophie sophie   23871427138 Mar 12  2019  dec2018_2.zip
+-rwxrwxr-x 1 sophie sophie   24985890515 Mar 12  2019  dec2018_3.zip
+drwxrwxr-x 2 sophie sophie          4096 Oct 22 12:40  details
+-rwxrwxr-x 1 sophie sophie          5865 Jul 26  2018  ECHO_May2018_mapping.txt
+-rwxrwxr-x 1 sophie sophie         16306 Jul 26  2018  ECHO_May2018_mapping.xlsx
+-rwxrwxr-x 1 sophie sophie   12818025980 Apr  4  2019  feb2019_1.zip
+-rwxrwxr-x 1 sophie sophie   13020378264 Apr  4  2019  feb2019_2.zip
+-rwxrwxr-x 1 sophie sophie   15442389636 Apr  4  2019  feb2019_3.zip
+-rwxrwxr-x 1 sophie sophie   15000386980 Apr  4  2019  feb2019_4.zip
+-rwxrwxr-x 1 sophie sophie   13670082991 Apr  4  2019  feb2019_5.zip
+-rwxrwxr-x 1 sophie sophie   14591216832 Apr  4  2019  feb2019_6.zip
+-rwxrwxr-x 1 sophie sophie        261114 Jul 18  2018 'February 2018 Illumina & Metagenome Sequencing.xlsx'
+-rwxrwxr-x 1 sophie sophie         35359 Jul 18  2018 'IMR-SampleSubmissionSheet_v8(Rowland_Feb20).xlsx'
+-rwxrwxr-x 1 sophie sophie         38317 Jul 18  2018 'IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx'
+-rwxrwxr-x 1 sophie sophie   14609065300 Jun  4 09:51  may2019_1.zip
+-rwxrwxr-x 1 sophie sophie   12369427841 Jun  4 10:00  may2019_2.zip
+-rwxrwxr-x 1 sophie sophie   14144220803 Jun  4 10:01  may2019_3.zip
+-rwxrwxr-x 1 sophie sophie   15537372869 Jun  4 10:03  may2019_4.zip
+-rwxrwxr-x 1 sophie sophie   13055782071 Jun  4 10:02  may2019_5.zip
+-rwxrwxr-x 1 sophie sophie   13340576337 Jun  4 10:30  may2019_6.zip
+-rwxrwxr-x 1 sophie sophie   35844182939 Jun  4 10:40  may2019_7.zip
+-rwxrwxr-x 1 sophie sophie           296 Apr 23  2019  missing.txt
+-rw-rw-r-- 1 kevin  kevin          71624 Aug 13 10:10  mothers_fastq.txt
+-rwxrwxr-x 1 sophie sophie          1184 Apr 23  2019  nobatch.txt
+-rwxrwxr-x 1 sophie sophie   77388259227 Jan 18  2019  nov2018.zip
+-rw-r--r-- 1 sophie facstaff 12620011783 Oct 21 14:48  oct2019_1.zip
+-rw-r--r-- 1 sophie facstaff 13081509700 Oct 21 14:55  oct2019_2.zip
+-rw-r--r-- 1 sophie facstaff 11247767313 Oct 21 14:56  oct2019_3.zip
+-rw-r--r-- 1 sophie facstaff 12018232158 Oct 21 14:57  oct2019_4.zip
+-rw-r--r-- 1 sophie facstaff 12199788900 Oct 21 14:57  oct2019_5.zip
+-rw-r--r-- 1 sophie facstaff 13383668214 Oct 21 14:57  oct2019_6.zip
+-rw-r--r-- 1 sophie facstaff        4696 Sep 10 11:58  p1.txt
+drwxrwxr-x 2 sophie sophie        536576 Oct 22 13:56  rawfastq
+-rwxrwxr-x 1 sophie sophie         68280 Jan 28  2019  rawfastq_batch005.txt
+-rwxrwxr-x 1 sophie sophie           354 May 30  2018  README.rtf
+drwxrwxr-x 3 sophie sophie         57344 Jan 22  2019  RowlandMetaG
+drwxr-xr-x 2 sophie facstaff        4096 Oct 22 13:56  RowlandNS44_part1
+drwxr-xr-x 2 sophie facstaff        4096 Oct 22 13:56  RowlandNS44_part2
+drwxr-xr-x 2 sophie facstaff        4096 Oct 22 13:56  RowlandNS44_part3
+drwxr-xr-x 2 sophie facstaff        4096 Oct 22 13:56  RowlandNS44_part4
+drwxr-xr-x 2 sophie facstaff        4096 Oct 22 13:56  RowlandNS44_part5
+drwxr-xr-x 2 sophie facstaff        4096 Oct 22 13:56  RowlandNS44_part6
+drwxrwxr-x 2 sophie sophie          4096 Jun  4 14:19  RowlandRunNS38_part1
+drwxrwxr-x 2 sophie sophie          4096 Jun  4 14:19  RowlandRunNS38_part2
+drwxrwxr-x 2 sophie sophie          4096 Jun  4 14:19  RowlandRunNS38_part3
+drwxrwxr-x 2 sophie sophie          4096 Jun  4 14:19  RowlandRunNS38_part4
+drwxrwxr-x 2 sophie sophie          4096 Jun  4 14:19  RowlandRunNS38_part5
+drwxrwxr-x 2 sophie sophie          4096 Jun  4 14:20  RowlandRunNS38_part6
+drwxr-xr-x 3 root   root           20480 May 30 16:23  RowlandRunNS39-remainder
+drwxr-xr-x 2 sophie facstaff        4096 Sep 10 12:03  RowlandRunNS42_part1
+drwxr-xr-x 2 sophie facstaff        4096 Sep 10 12:03  RowlandRunNS42_part2
+drwxr-xr-x 2 sophie facstaff        4096 Sep 10 12:03  RowlandRunNS42_part3
+drwxr-xr-x 2 sophie facstaff        4096 Sep 10 12:03  RowlandRunNS42_part4
+drwxr-xr-x 2 sophie facstaff        4096 Sep 10 12:03  RowlandRunNS42_part5
+drwxr-xr-x 2 sophie facstaff        4096 Sep 10 12:03  RowlandRunNS42_part6
+drwxr-xr-x 2 sophie facstaff        4096 Sep 18 17:57  RowlandRunNS43_part1
+drwxr-xr-x 2 sophie facstaff        4096 Sep 18 17:57  RowlandRunNS43_part2
+drwxr-xr-x 2 sophie facstaff        4096 Sep 18 17:57  RowlandRunNS43_part3
+drwxr-xr-x 2 sophie facstaff        4096 Sep 18 17:58  RowlandRunNS43_part4
+drwxr-xr-x 2 sophie facstaff        4096 Sep 18 17:58  RowlandRunNS43_part5
+drwxr-xr-x 2 sophie facstaff        4096 Sep 18 17:58  RowlandRunNS43_part6
+-rw-r--r-- 1 sophie facstaff 13950521134 Sep 18 11:23  sep2019_1.zip
+-rw-r--r-- 1 sophie facstaff 11916437699 Sep 18 11:22  sep2019_2.zip
+-rw-r--r-- 1 sophie facstaff 13319331835 Sep 18 11:28  sep2019_3.zip
+-rw-r--r-- 1 sophie facstaff 12688859783 Sep 18 11:25  sep2019_4.zip
+-rw-r--r-- 1 sophie facstaff 12913826643 Sep 18 11:25  sep2019_5.zip
+-rw-r--r-- 1 sophie facstaff 13929224254 Sep 18 11:26  sep2019_6.zip
+drwx------ 2 sophie facstaff        4096 Aug 28 12:27  submissions
+```
+
+Many redundant things. Let's start with the `.zip` files.
+
+```sh
+$ ls -l *.zip
+-rwxrwxr-x 1 sophie sophie   75492823670 Jan 21  2019 apr2018.zip
+-rw-r--r-- 1 sophie facstaff 14698942886 Sep  9 13:57 aug2019_1.zip
+-rw-r--r-- 1 sophie facstaff 15517466965 Sep  9 14:17 aug2019_2.zip
+-rw-r--r-- 1 sophie facstaff 17692116315 Sep  9 14:06 aug2019_3.zip
+-rw-r--r-- 1 sophie facstaff 14474183863 Sep  9 14:03 aug2019_4.zip
+-rw-r--r-- 1 sophie facstaff 16998573493 Sep  9 14:13 aug2019_5.zip
+-rw-r--r-- 1 sophie facstaff 15055872754 Sep  9 14:18 aug2019_6.zip
+-rw-rw-r-- 1 root   root     35844182939 May 30 19:02 batch009.2.zip
+-rwxrwxr-x 1 sophie sophie   25085043521 Mar 12  2019 dec2018_1.zip
+-rwxrwxr-x 1 sophie sophie   23871427138 Mar 12  2019 dec2018_2.zip
+-rwxrwxr-x 1 sophie sophie   24985890515 Mar 12  2019 dec2018_3.zip
+-rwxrwxr-x 1 sophie sophie   12818025980 Apr  4  2019 feb2019_1.zip
+-rwxrwxr-x 1 sophie sophie   13020378264 Apr  4  2019 feb2019_2.zip
+-rwxrwxr-x 1 sophie sophie   15442389636 Apr  4  2019 feb2019_3.zip
+-rwxrwxr-x 1 sophie sophie   15000386980 Apr  4  2019 feb2019_4.zip
+-rwxrwxr-x 1 sophie sophie   13670082991 Apr  4  2019 feb2019_5.zip
+-rwxrwxr-x 1 sophie sophie   14591216832 Apr  4  2019 feb2019_6.zip
+-rwxrwxr-x 1 sophie sophie   14609065300 Jun  4 09:51 may2019_1.zip
+-rwxrwxr-x 1 sophie sophie   12369427841 Jun  4 10:00 may2019_2.zip
+-rwxrwxr-x 1 sophie sophie   14144220803 Jun  4 10:01 may2019_3.zip
+-rwxrwxr-x 1 sophie sophie   15537372869 Jun  4 10:03 may2019_4.zip
+-rwxrwxr-x 1 sophie sophie   13055782071 Jun  4 10:02 may2019_5.zip
+-rwxrwxr-x 1 sophie sophie   13340576337 Jun  4 10:30 may2019_6.zip
+-rwxrwxr-x 1 sophie sophie   35844182939 Jun  4 10:40 may2019_7.zip
+-rwxrwxr-x 1 sophie sophie   77388259227 Jan 18  2019 nov2018.zip
+-rw-r--r-- 1 sophie facstaff 12620011783 Oct 21 14:48 oct2019_1.zip
+-rw-r--r-- 1 sophie facstaff 13081509700 Oct 21 14:55 oct2019_2.zip
+-rw-r--r-- 1 sophie facstaff 11247767313 Oct 21 14:56 oct2019_3.zip
+-rw-r--r-- 1 sophie facstaff 12018232158 Oct 21 14:57 oct2019_4.zip
+-rw-r--r-- 1 sophie facstaff 12199788900 Oct 21 14:57 oct2019_5.zip
+-rw-r--r-- 1 sophie facstaff 13383668214 Oct 21 14:57 oct2019_6.zip
+-rw-r--r-- 1 sophie facstaff 13950521134 Sep 18 11:23 sep2019_1.zip
+-rw-r--r-- 1 sophie facstaff 11916437699 Sep 18 11:22 sep2019_2.zip
+-rw-r--r-- 1 sophie facstaff 13319331835 Sep 18 11:28 sep2019_3.zip
+-rw-r--r-- 1 sophie facstaff 12688859783 Sep 18 11:25 sep2019_4.zip
+-rw-r--r-- 1 sophie facstaff 12913826643 Sep 18 11:25 sep2019_5.zip
+-rw-r--r-- 1 sophie facstaff 13929224254 Sep 18 11:26 sep2019_6.zip
+```
+
+I will go systematically by `MMMYYYY_#.zip`, which should correspond to specific batch###'s.
+
+```sh
+# batch012
+$ ls -l oct*
+-rw-r--r-- 1 sophie facstaff 12620011783 Oct 21 14:48 oct2019_1.zip
+-rw-r--r-- 1 sophie facstaff 13081509700 Oct 21 14:55 oct2019_2.zip
+-rw-r--r-- 1 sophie facstaff 11247767313 Oct 21 14:56 oct2019_3.zip
+-rw-r--r-- 1 sophie facstaff 12018232158 Oct 21 14:57 oct2019_4.zip
+-rw-r--r-- 1 sophie facstaff 12199788900 Oct 21 14:57 oct2019_5.zip
+-rw-r--r-- 1 sophie facstaff 13383668214 Oct 21 14:57 oct2019_6.zip
+$ rm oct*
+
+# batch011
+$ ls -l sep*
+-rw-r--r-- 1 sophie facstaff 13950521134 Sep 18 11:23 sep2019_1.zip
+-rw-r--r-- 1 sophie facstaff 11916437699 Sep 18 11:22 sep2019_2.zip
+-rw-r--r-- 1 sophie facstaff 13319331835 Sep 18 11:28 sep2019_3.zip
+-rw-r--r-- 1 sophie facstaff 12688859783 Sep 18 11:25 sep2019_4.zip
+-rw-r--r-- 1 sophie facstaff 12913826643 Sep 18 11:25 sep2019_5.zip
+-rw-r--r-- 1 sophie facstaff 13929224254 Sep 18 11:26 sep2019_6.zip
+$ rm sep*
+
+# batch010
+$ ls -l aug*
+-rw-r--r-- 1 sophie facstaff 14698942886 Sep  9 13:57 aug2019_1.zip
+-rw-r--r-- 1 sophie facstaff 15517466965 Sep  9 14:17 aug2019_2.zip
+-rw-r--r-- 1 sophie facstaff 17692116315 Sep  9 14:06 aug2019_3.zip
+-rw-r--r-- 1 sophie facstaff 14474183863 Sep  9 14:03 aug2019_4.zip
+-rw-r--r-- 1 sophie facstaff 16998573493 Sep  9 14:13 aug2019_5.zip
+-rw-r--r-- 1 sophie facstaff 15055872754 Sep  9 14:18 aug2019_6.zip
+$ rm aug*
+
+# batch009
+$ ls -l may*
+-rwxrwxr-x 1 sophie sophie 14609065300 Jun  4 09:51 may2019_1.zip
+-rwxrwxr-x 1 sophie sophie 12369427841 Jun  4 10:00 may2019_2.zip
+-rwxrwxr-x 1 sophie sophie 14144220803 Jun  4 10:01 may2019_3.zip
+-rwxrwxr-x 1 sophie sophie 15537372869 Jun  4 10:03 may2019_4.zip
+-rwxrwxr-x 1 sophie sophie 13055782071 Jun  4 10:02 may2019_5.zip
+-rwxrwxr-x 1 sophie sophie 13340576337 Jun  4 10:30 may2019_6.zip
+-rwxrwxr-x 1 sophie sophie 35844182939 Jun  4 10:40 may2019_7.zip
+$ rm may*
+$ rm batch009.2.zip
+
+# batch008
+$ ls -l feb*
+-rwxrwxr-x 1 sophie sophie 12818025980 Apr  4  2019 feb2019_1.zip
+-rwxrwxr-x 1 sophie sophie 13020378264 Apr  4  2019 feb2019_2.zip
+-rwxrwxr-x 1 sophie sophie 15442389636 Apr  4  2019 feb2019_3.zip
+-rwxrwxr-x 1 sophie sophie 15000386980 Apr  4  2019 feb2019_4.zip
+-rwxrwxr-x 1 sophie sophie 13670082991 Apr  4  2019 feb2019_5.zip
+-rwxrwxr-x 1 sophie sophie 14591216832 Apr  4  2019 feb2019_6.zip
+$ rm feb*
+
+# batch007
+$ ls -l dec*
+-rwxrwxr-x 1 sophie sophie 25085043521 Mar 12  2019 dec2018_1.zip
+-rwxrwxr-x 1 sophie sophie 23871427138 Mar 12  2019 dec2018_2.zip
+-rwxrwxr-x 1 sophie sophie 24985890515 Mar 12  2019 dec2018_3.zip
+$ rm dec*
+
+# remaining zip files
+$ ls -l *.zip
+-rwxrwxr-x 1 sophie sophie 75492823670 Jan 21  2019 apr2018.zip
+-rw-rw-r-- 1 root   root   35844182939 May 30 19:02 batch009.2.zip
+-rwxrwxr-x 1 sophie sophie 77388259227 Jan 18  2019 nov2018.zip
+# check batch009 files are all present in rawfastq/
+$ ls rawfastq/ | grep --file=batch009_files.txt | wc
+   1040    1040   38336
+$ wc batch009_files.txt
+ 1040  1040 38336 batch009_files.txt
+$ rm *.zip
+```
+
+Now onto the (supposedly) empty unzipped folders.
+
+```sh
+$ ls -l
+...
+drwxrwxr-x 3 sophie sophie    57344 Jan 22  2019  RowlandMetaG
+drwxr-xr-x 2 sophie facstaff   4096 Oct 22 13:56  RowlandNS44_part1
+drwxr-xr-x 2 sophie facstaff   4096 Oct 22 13:56  RowlandNS44_part2
+drwxr-xr-x 2 sophie facstaff   4096 Oct 22 13:56  RowlandNS44_part3
+drwxr-xr-x 2 sophie facstaff   4096 Oct 22 13:56  RowlandNS44_part4
+drwxr-xr-x 2 sophie facstaff   4096 Oct 22 13:56  RowlandNS44_part5
+drwxr-xr-x 2 sophie facstaff   4096 Oct 22 13:56  RowlandNS44_part6
+drwxrwxr-x 2 sophie sophie     4096 Jun  4 14:19  RowlandRunNS38_part1
+drwxrwxr-x 2 sophie sophie     4096 Jun  4 14:19  RowlandRunNS38_part2
+drwxrwxr-x 2 sophie sophie     4096 Jun  4 14:19  RowlandRunNS38_part3
+drwxrwxr-x 2 sophie sophie     4096 Jun  4 14:19  RowlandRunNS38_part4
+drwxrwxr-x 2 sophie sophie     4096 Jun  4 14:19  RowlandRunNS38_part5
+drwxrwxr-x 2 sophie sophie     4096 Jun  4 14:20  RowlandRunNS38_part6
+drwxr-xr-x 3 root   root      20480 May 30 16:23  RowlandRunNS39-remainder
+drwxr-xr-x 2 sophie facstaff   4096 Sep 10 12:03  RowlandRunNS42_part1
+drwxr-xr-x 2 sophie facstaff   4096 Sep 10 12:03  RowlandRunNS42_part2
+drwxr-xr-x 2 sophie facstaff   4096 Sep 10 12:03  RowlandRunNS42_part3
+drwxr-xr-x 2 sophie facstaff   4096 Sep 10 12:03  RowlandRunNS42_part4
+drwxr-xr-x 2 sophie facstaff   4096 Sep 10 12:03  RowlandRunNS42_part5
+drwxr-xr-x 2 sophie facstaff   4096 Sep 10 12:03  RowlandRunNS42_part6
+drwxr-xr-x 2 sophie facstaff   4096 Sep 18 17:57  RowlandRunNS43_part1
+drwxr-xr-x 2 sophie facstaff   4096 Sep 18 17:57  RowlandRunNS43_part2
+drwxr-xr-x 2 sophie facstaff   4096 Sep 18 17:57  RowlandRunNS43_part3
+drwxr-xr-x 2 sophie facstaff   4096 Sep 18 17:58  RowlandRunNS43_part4
+drwxr-xr-x 2 sophie facstaff   4096 Sep 18 17:58  RowlandRunNS43_part5
+drwxr-xr-x 2 sophie facstaff   4096 Sep 18 17:58  RowlandRunNS43_part6
+...
+
+# Remove all above folders except RowlandRunNS39-remainder/ and RowlandMetaG/
+$ ls RowlandRunNS4*
+ls RowlandRunNS4*
+RowlandRunNS42_part1:
+
+RowlandRunNS42_part2:
+
+RowlandRunNS42_part3:
+
+RowlandRunNS42_part4:
+
+RowlandRunNS42_part5:
+
+RowlandRunNS42_part6:
+
+RowlandRunNS43_part1:
+
+RowlandRunNS43_part2:
+
+RowlandRunNS43_part3:
+
+RowlandRunNS43_part4:
+
+RowlandRunNS43_part5:
+
+RowlandRunNS43_part6:
+$ rmdir RowlandRunNS4*
+$ rmdir Rowland*
+rmdir: failed to remove 'RowlandMetaG': Directory not empty
+rmdir: failed to remove 'RowlandRunNS39-remainder': Directory not empty
+$ ls Rowland*
+```
+
+What still remains? What can be removed? (Oct 25 2019)
+
+```sh
+$ ls -l
+total 1456
+-rwxrwxr-x 1 sophie sophie      165 Jul 27  2018 '~$IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx'
+-rwxrwxr-x 1 sophie sophie    23608 Apr 20  2019  batch001_files.txt
+-rwxrwxr-x 1 sophie sophie    28048 Apr 20  2019  batch002_files.txt
+-rwxrwxr-x 1 sophie sophie    22424 Apr 20  2019  batch003_files.txt
+-rwxrwxr-x 1 sophie sophie    17992 Apr 23  2019  batch004_files.txt
+-rwxrwxr-x 1 sophie sophie    28344 Apr 18  2019  batch005_files.txt
+-rwxrwxr-x 1 sophie sophie    19464 Jan 19  2019  batch006_files.txt
+-rwxrwxr-x 1 sophie sophie    19168 Mar 12  2019  batch007_files.txt
+-rwxrwxr-x 1 sophie sophie    28344 Apr  5  2019  batch008_files.txt
+drwxrwxr-x 4 kevin  kevin      4096 May 28 10:15  batch009
+-rwxrwxr-x 1 sophie sophie    38336 Jun  4 13:29  batch009_files.txt
+drwxrwxr-x 8 kevin  facstaff   4096 Sep 10 13:22  batch010
+-rw-r--r-- 1 sophie facstaff  28344 Sep 10 09:32  batch010_files.txt
+-rw-r--r-- 1 sophie facstaff  28344 Sep 18 17:11  batch011_files.txt
+-rw-r--r-- 1 sophie facstaff  28352 Oct 22 10:51  batch012_files.txt
+drwxrwxr-x 2 sophie sophie     4096 Oct 22 12:40  details
+-rwxrwxr-x 1 sophie sophie     5865 Jul 26  2018  ECHO_May2018_mapping.txt
+-rwxrwxr-x 1 sophie sophie    16306 Jul 26  2018  ECHO_May2018_mapping.xlsx
+-rwxrwxr-x 1 sophie sophie   261114 Jul 18  2018 'February 2018 Illumina & Metagenome Sequencing.xlsx'
+-rwxrwxr-x 1 sophie sophie    35359 Jul 18  2018 'IMR-SampleSubmissionSheet_v8(Rowland_Feb20).xlsx'
+-rwxrwxr-x 1 sophie sophie    38317 Jul 18  2018 'IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx'
+-rwxrwxr-x 1 sophie sophie      296 Apr 23  2019  missing.txt
+-rw-rw-r-- 1 kevin  kevin     71624 Aug 13 10:10  mothers_fastq.txt
+-rwxrwxr-x 1 sophie sophie     1184 Apr 23  2019  nobatch.txt
+-rw-r--r-- 1 sophie facstaff   4696 Sep 10 11:58  p1.txt
+drwxrwxr-x 2 sophie sophie   536576 Oct 22 13:56  rawfastq
+-rwxrwxr-x 1 sophie sophie    68280 Jan 28  2019  rawfastq_batch005.txt
+-rwxrwxr-x 1 sophie sophie      354 May 30  2018  README.rtf
+drwxrwxr-x 3 sophie sophie    57344 Jan 22  2019  RowlandMetaG
+drwxr-xr-x 3 root   root      20480 May 30 16:23  RowlandRunNS39-remainder
+drwx------ 2 sophie facstaff   4096 Aug 28 12:27  submissions
+```
+
+There are 4 folders with a lot of data that we don't expect to be here.
+
+```
+/lovelace/echo/sequencing/mgx/
+# Folders we want
+details/
+rawfastq/
+submissions/
+# Folders we don't want
+RowlandMetaG/
+RowlandRunNS39-remainder/
+batch009/
+batch010/
+```
+
+All these folders seem to have rawfastq files which should already be saved in `mgx/rawfastq/`
+but let's double check before we delete important sequencing data.
+
+```sh
+$ ls RowlandMetaG/ >> rmg.txt
+$ ls RowlandRunNS39-remainder/ >> rmg.txt
+$ ls batch009/rawfastq/ >> rmg.txt
+$ ls batch010/RowlandRunNS42_part1 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part2 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part3 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part4 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part5 >> rmg.txt
+$ ls batch010/RowlandRunNS42_part6 >> rmg.txt
+
+$ for f in `cat rmg.txt`; do if [ ! -f rawfastq/$f ]; then echo "$f is missing"; fi done
+```
