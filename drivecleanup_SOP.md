@@ -28,7 +28,7 @@ echo/
     mgx-old/
 ```
 
-## Cleaning /lovelace/echo/sequencing/mgx/ (Oct 24, 2019)
+## Cleaning /lovelace/echo/sequencing/mgx/
 
 ```sh
 $ ssh ada
@@ -382,3 +382,176 @@ $ ls batch010/RowlandRunNS42_part6 >> rmg.txt
 
 $ for f in `cat rmg.txt`; do if [ ! -f rawfastq/$f ]; then echo "$f is missing"; fi done
 ```
+Many files seem to be missing here but - and _ don't match on some file names. Fix and then check again
+
+```sh
+$ for f in `cat rmg.txt`; do if [ ! -f rawfastq/$f ]; then echo $f; fi done >> missing.txt; fi done
+$ cat missing.txt | perl -pe 's/^([CM]\d+)_(\d+[FE])_(\d+[A-Z]_S)/\1-\2-\3/' > missing_fix.txt
+$ for f in `cat missing_fix.txt`; do if [ ! -f rawfastq/$f ]; then echo "$f is missing"; fi done
+M0742-2F-1A_S13_L001_R1_001.fastq.gz is missing
+M0742-2F-1A_S13_L001_R2_001.fastq.gz is missing
+M0742-2F-1A_S13_L002_R1_001.fastq.gz is missing
+M0742-2F-1A_S13_L002_R2_001.fastq.gz is missing
+M0742-2F-1A_S13_L003_R1_001.fastq.gz is missing
+M0742-2F-1A_S13_L003_R2_001.fastq.gz is missing
+M0742-2F-1A_S13_L004_R1_001.fastq.gz is missing
+M0742-2F-1A_S13_L004_R2_001.fastq.gz is missing
+061F-1-8-23-17-O_S24_L001_R1_001.fastq.gz is missing
+061F-1-8-23-17-O_S24_L001_R2_001.fastq.gz is missing
+061F-1-8-23-17-O_S24_L002_R1_001.fastq.gz is missing
+061F-1-8-23-17-O_S24_L002_R2_001.fastq.gz is missing
+061F-1-8-23-17-O_S24_L003_R1_001.fastq.gz is missing
+061F-1-8-23-17-O_S24_L003_R2_001.fastq.gz is missing
+061F-1-8-23-17-O_S24_L004_R1_001.fastq.gz is missing
+061F-1-8-23-17-O_S24_L004_R2_001.fastq.gz is missing
+061F-2-8-23-17-O_S36_L001_R1_001.fastq.gz is missing
+061F-2-8-23-17-O_S36_L001_R2_001.fastq.gz is missing
+061F-2-8-23-17-O_S36_L002_R1_001.fastq.gz is missing
+061F-2-8-23-17-O_S36_L002_R2_001.fastq.gz is missing
+061F-2-8-23-17-O_S36_L003_R1_001.fastq.gz is missing
+061F-2-8-23-17-O_S36_L003_R2_001.fastq.gz is missing
+061F-2-8-23-17-O_S36_L004_R1_001.fastq.gz is missing
+061F-2-8-23-17-O_S36_L004_R2_001.fastq.gz is missing
+066F-8-1-17-O_S59_L001_R1_001.fastq.gz is missing
+066F-8-1-17-O_S59_L001_R2_001.fastq.gz is missing
+066F-8-1-17-O_S59_L002_R1_001.fastq.gz is missing
+066F-8-1-17-O_S59_L002_R2_001.fastq.gz is missing
+066F-8-1-17-O_S59_L003_R1_001.fastq.gz is missing
+066F-8-1-17-O_S59_L003_R2_001.fastq.gz is missing
+066F-8-1-17-O_S59_L004_R1_001.fastq.gz is missing
+066F-8-1-17-O_S59_L004_R2_001.fastq.gz is missing
+117D-1-8-24-17-O_S71_L001_R1_001.fastq.gz is missing
+117D-1-8-24-17-O_S71_L001_R2_001.fastq.gz is missing
+117D-1-8-24-17-O_S71_L002_R1_001.fastq.gz is missing
+117D-1-8-24-17-O_S71_L002_R2_001.fastq.gz is missing
+117D-1-8-24-17-O_S71_L003_R1_001.fastq.gz is missing
+117D-1-8-24-17-O_S71_L003_R2_001.fastq.gz is missing
+117D-1-8-24-17-O_S71_L004_R1_001.fastq.gz is missing
+117D-1-8-24-17-O_S71_L004_R2_001.fastq.gz is missing
+126H-7-25-17-O_S35_L001_R1_001.fastq.gz is missing
+126H-7-25-17-O_S35_L001_R2_001.fastq.gz is missing
+126H-7-25-17-O_S35_L002_R1_001.fastq.gz is missing
+126H-7-25-17-O_S35_L002_R2_001.fastq.gz is missing
+126H-7-25-17-O_S35_L003_R1_001.fastq.gz is missing
+126H-7-25-17-O_S35_L003_R2_001.fastq.gz is missing
+126H-7-25-17-O_S35_L004_R1_001.fastq.gz is missing
+126H-7-25-17-O_S35_L004_R2_001.fastq.gz is missing
+127F-7-25-17-O_S47_L001_R1_001.fastq.gz is missing
+127F-7-25-17-O_S47_L001_R2_001.fastq.gz is missing
+127F-7-25-17-O_S47_L002_R1_001.fastq.gz is missing
+127F-7-25-17-O_S47_L002_R2_001.fastq.gz is missing
+127F-7-25-17-O_S47_L003_R1_001.fastq.gz is missing
+127F-7-25-17-O_S47_L003_R2_001.fastq.gz is missing
+127F-7-25-17-O_S47_L004_R1_001.fastq.gz is missing
+127F-7-25-17-O_S47_L004_R2_001.fastq.gz is missing
+189E-12-2-17-O_S96_L001_R1_001.fastq.gz is missing
+189E-12-2-17-O_S96_L001_R2_001.fastq.gz is missing
+189E-12-2-17-O_S96_L002_R1_001.fastq.gz is missing
+189E-12-2-17-O_S96_L002_R2_001.fastq.gz is missing
+189E-12-2-17-O_S96_L003_R1_001.fastq.gz is missing
+189E-12-2-17-O_S96_L003_R2_001.fastq.gz is missing
+189E-12-2-17-O_S96_L004_R1_001.fastq.gz is missing
+189E-12-2-17-O_S96_L004_R2_001.fastq.gz is missing
+229D-8-4-17-O_S11_L001_R1_001.fastq.gz is missing
+229D-8-4-17-O_S11_L001_R2_001.fastq.gz is missing
+229D-8-4-17-O_S11_L002_R1_001.fastq.gz is missing
+229D-8-4-17-O_S11_L002_R2_001.fastq.gz is missing
+229D-8-4-17-O_S11_L003_R1_001.fastq.gz is missing
+229D-8-4-17-O_S11_L003_R2_001.fastq.gz is missing
+229D-8-4-17-O_S11_L004_R1_001.fastq.gz is missing
+229D-8-4-17-O_S11_L004_R2_001.fastq.gz is missing
+240C-1-9-19-17-O_S95_L001_R1_001.fastq.gz is missing
+240C-1-9-19-17-O_S95_L001_R2_001.fastq.gz is missing
+240C-1-9-19-17-O_S95_L002_R1_001.fastq.gz is missing
+240C-1-9-19-17-O_S95_L002_R2_001.fastq.gz is missing
+240C-1-9-19-17-O_S95_L003_R1_001.fastq.gz is missing
+240C-1-9-19-17-O_S95_L003_R2_001.fastq.gz is missing
+240C-1-9-19-17-O_S95_L004_R1_001.fastq.gz is missing
+240C-1-9-19-17-O_S95_L004_R2_001.fastq.gz is missing
+240C-2-9-19-17-O_S12_L001_R1_001.fastq.gz is missing
+240C-2-9-19-17-O_S12_L001_R2_001.fastq.gz is missing
+240C-2-9-19-17-O_S12_L002_R1_001.fastq.gz is missing
+240C-2-9-19-17-O_S12_L002_R2_001.fastq.gz is missing
+240C-2-9-19-17-O_S12_L003_R1_001.fastq.gz is missing
+240C-2-9-19-17-O_S12_L003_R2_001.fastq.gz is missing
+240C-2-9-19-17-O_S12_L004_R1_001.fastq.gz is missing
+240C-2-9-19-17-O_S12_L004_R2_001.fastq.gz is missing
+296E-7-26-17-O_S23_L001_R1_001.fastq.gz is missing
+296E-7-26-17-O_S23_L001_R2_001.fastq.gz is missing
+296E-7-26-17-O_S23_L002_R1_001.fastq.gz is missing
+296E-7-26-17-O_S23_L002_R2_001.fastq.gz is missing
+296E-7-26-17-O_S23_L003_R1_001.fastq.gz is missing
+296E-7-26-17-O_S23_L003_R2_001.fastq.gz is missing
+296E-7-26-17-O_S23_L004_R1_001.fastq.gz is missing
+296E-7-26-17-O_S23_L004_R2_001.fastq.gz is missing
+499A-8-25-17-O_S48_L001_R1_001.fastq.gz is missing
+499A-8-25-17-O_S48_L001_R2_001.fastq.gz is missing
+499A-8-25-17-O_S48_L002_R1_001.fastq.gz is missing
+499A-8-25-17-O_S48_L002_R2_001.fastq.gz is missing
+499A-8-25-17-O_S48_L003_R1_001.fastq.gz is missing
+499A-8-25-17-O_S48_L003_R2_001.fastq.gz is missing
+499A-8-25-17-O_S48_L004_R1_001.fastq.gz is missing
+499A-8-25-17-O_S48_L004_R2_001.fastq.gz is missing
+520A-1-10-12-17-O_S60_L001_R1_001.fastq.gz is missing
+520A-1-10-12-17-O_S60_L001_R2_001.fastq.gz is missing
+520A-1-10-12-17-O_S60_L002_R1_001.fastq.gz is missing
+520A-1-10-12-17-O_S60_L002_R2_001.fastq.gz is missing
+520A-1-10-12-17-O_S60_L003_R1_001.fastq.gz is missing
+520A-1-10-12-17-O_S60_L003_R2_001.fastq.gz is missing
+520A-1-10-12-17-O_S60_L004_R1_001.fastq.gz is missing
+520A-1-10-12-17-O_S60_L004_R2_001.fastq.gz is missing
+520A-2-10-12-17-O_S72_L001_R1_001.fastq.gz is missing
+520A-2-10-12-17-O_S72_L001_R2_001.fastq.gz is missing
+520A-2-10-12-17-O_S72_L002_R1_001.fastq.gz is missing
+520A-2-10-12-17-O_S72_L002_R2_001.fastq.gz is missing
+520A-2-10-12-17-O_S72_L003_R1_001.fastq.gz is missing
+520A-2-10-12-17-O_S72_L003_R2_001.fastq.gz is missing
+520A-2-10-12-17-O_S72_L004_R1_001.fastq.gz is missing
+520A-2-10-12-17-O_S72_L004_R2_001.fastq.gz is missing
+544A-11-2-17-O_S84_L001_R1_001.fastq.gz is missing
+544A-11-2-17-O_S84_L001_R2_001.fastq.gz is missing
+544A-11-2-17-O_S84_L002_R1_001.fastq.gz is missing
+544A-11-2-17-O_S84_L002_R2_001.fastq.gz is missing
+544A-11-2-17-O_S84_L003_R1_001.fastq.gz is missing
+544A-11-2-17-O_S84_L003_R2_001.fastq.gz is missing
+544A-11-2-17-O_S84_L004_R1_001.fastq.gz is missing
+544A-11-2-17-O_S84_L004_R2_001.fastq.gz is missing
+weak_failed is missing
+weak_failed is missing
+```
+ All these files have either been renamed (ie `M0742_-2F-1A`) or are oral samples from `batch001`.
+
+ ```sh
+# remove remaining folders
+ $ rm -r batch009/
+ $ rm -r batch010/
+ $ rm -r RowlandRunNS39-remainder/
+
+# move oral samples to new oral_mgx/ folder
+$ cd sequencing/
+$ mkdir oral_mgx/
+$ mv mgx/RowlandMetaG/ oral_mgx/
+$ mv oral_mgx/RowlandMetaG/ oral_mgx/rawfastq/
+# some renamed fecal samples remain, remove those
+$ ls rawfastq/*fastq.gz | grep -E "^rawfastq\/C" | xargs rm
+```
+
+Finally, we want to delete all the temporary files we created in this process as well as the remaining miscellaneous `.txt` files.
+
+```sh
+$ cd mgx/
+$ rm batch001_missing.txt missing.txt missing_fix.txt rmg.txt
+$ rm mothers_fastq.txt nobatch.txt rawfastq_batch005.txt p1.txt
+```
+
+We want to move the remaining miscellaneous files to `echo/attic/`.
+
+```sh
+$ mkdir /lovelace/echo/attic/sequencing/
+$ cd sequencing/mgx/
+$ mv IMR-SampleSubmissionSheet_v8\(Rowland_* /lovelace/echo/attic/sequencing/
+$ mv *.xlsx /lovelace/echo/attic/sequencing/
+$ mv ECHO_May2018_mapping.txt /lovelace/echo/attic/sequencing/
+```
+
+## Rsyncing from `lovelace` to `franklin` and `ntm`
