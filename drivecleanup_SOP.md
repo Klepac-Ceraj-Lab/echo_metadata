@@ -28,6 +28,284 @@ echo/
     mgx-old/
 ```
 
+## rsync changes across drives
+
+```sh
+$ ssh rosalind
+$ rsync -avzP /Volumes/vkclab/echo/databases/ /Volumes/franklin/echo/databases/
+$ rsync -avzP /Volumes/vkclab/echo/databases/ ada:/lovelace/echo/databases/
+```
+
+Want to rsync `/lovelace/echo/sequencing/` with `/Volumes/echo/sequencing/` and `/Volumes/vkclab/echo/sequencing` and `echo/attic/sequencing`. What `rsync` options should I use?
+
+`-avzP` = archive, verbose, compress, show progress
+
+**`-n` = dry-run!!!**
+
+1. Rsync `lovelace/echo/attic/sequencing` to franklin and ntm
+  - Copy what's in lovelace and not delete what's in franklin and ntm
+
+```sh
+  $ ssh rosalind
+  $ rsync -avzP ada:/lovelace/echo/attic/sequencing/ /Volumes/vkclab/echo/attic/sequencing/
+  $ rsync -avzP ada:/lovelace/echo/attic/sequencing/ /Volumes/franklin/echo/attic/sequencing/
+```
+```sh
+# Differences between echo/attic/sequencing/
+# /lovelace/echo/
+ls -l attic/sequencing/
+total 360
+-rw-rw-r-- 1 sophie facstaff    165 Jul 27  2018 '~$IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx'
+-rw-rw-r-- 1 sophie facstaff   5865 Jul 26  2018  ECHO_May2018_mapping.txt
+-rw-rw-r-- 1 sophie facstaff  16306 Jul 26  2018  ECHO_May2018_mapping.xlsx
+-rw-rw-r-- 1 sophie facstaff 261114 Jul 18  2018 'February 2018 Illumina & Metagenome Sequencing.xlsx'
+-rw-rw-r-- 1 sophie facstaff  35359 Jul 18  2018 'IMR-SampleSubmissionSheet_v8(Rowland_Feb20).xlsx'
+-rw-rw-r-- 1 sophie facstaff  38317 Jul 18  2018 'IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx'
+# /Volumes/vkclab/echo/
+$ ls -l attic/sequencing/
+# /Volumes/franklin/echo/
+$ ls -l attic/sequencing/
+total 0
+drwxrwxr-x  10 sophie  staff  340 May 30  2019 weak_failed
+```
+
+2. Rsync `lovelace/echo/sequencing` to franklin and ntm
+  - Copy folders within `sequencing/`
+    - Copy `sequencing/oral_mgx`
+  - Remove files that have been removed from `sequencing/mgx/`
+
+```sh
+# Copy /sequencing/oral_mgx
+$ ssh rosalind
+$ mkdir sequencing/oral_mgx  #on franklin and ntm
+$ rsync -avzP ada:/lovelace/echo/sequencing/oral_mgx /Volumes/vkclab/echo/sequencing/oral_mgx
+$ rsync -avzP ada:/lovelace/echo/sequencing/oral_mgx /Volumes/franklin/echo/sequencing/oral_mgx
+
+# Copy /sequencing/mgx
+$ rsync -avzP ada:/lovelace/echo/sequencing/mgx /Volumes/vkclab/echo/sequencing/mgx --delete
+$ rsync -avzPn ada:/lovelace/echo/sequencing/mgx /Volumes/franklin/echo/sequencing/mgx --delete
+```
+
+```sh
+# Differences between echo/sequencing
+# /lovelace/echo/
+$ ls -l sequencing/mgx/
+total 856
+-rw-rw-r-- 1 sophie facstaff  23608 Apr 20  2019 batch001_files.txt
+-rw-rw-r-- 1 sophie facstaff  28048 Apr 20  2019 batch002_files.txt
+-rw-rw-r-- 1 sophie facstaff  22424 Apr 20  2019 batch003_files.txt
+-rw-rw-r-- 1 sophie facstaff  17992 Apr 23  2019 batch004_files.txt
+-rw-rw-r-- 1 sophie facstaff  28344 Apr 18  2019 batch005_files.txt
+-rw-rw-r-- 1 sophie facstaff  19464 Jan 19  2019 batch006_files.txt
+-rw-rw-r-- 1 sophie facstaff  19168 Mar 12  2019 batch007_files.txt
+-rw-rw-r-- 1 sophie facstaff  28344 Apr  5  2019 batch008_files.txt
+-rw-rw-r-- 1 sophie facstaff  38336 Jun  4  2019 batch009_files.txt
+-rw-rw-r-- 1 sophie facstaff  28344 Sep 10 09:32 batch010_files.txt
+-rw-rw-r-- 1 sophie facstaff  28344 Sep 18 17:11 batch011_files.txt
+-rw-rw-r-- 1 sophie facstaff  28352 Oct 22 10:51 batch012_files.txt
+drwxrwxr-x 2 sophie facstaff   4096 Oct 22 12:40 details
+drwxrwxr-x 2 sophie facstaff 536576 Oct 22 13:56 rawfastq
+-rw-rw-r-- 1 sophie facstaff    354 May 30  2018 README.rtf
+drwxrwx--- 2 sophie facstaff   4096 Aug 28 12:27 submissions
+# /Volumes/franklin/echo/
+$ ls -l sequencing/mgx/
+total 1324167744
+-rwxrwxr-x     1 sophie  staff         5865 Jul 26  2018 ECHO_May2018_mapping.txt
+-rwxrwxr-x     1 sophie  staff        16306 Jul 26  2018 ECHO_May2018_mapping.xlsx
+-rwxrwxr-x     1 sophie  staff       261114 Jul 18  2018 February 2018 Illumina & Metagenome Sequencing.xlsx
+-rwxrwxr-x     1 sophie  staff        35359 Jul 18  2018 IMR-SampleSubmissionSheet_v8(Rowland_Feb20).xlsx
+-rwxrwxr-x     1 sophie  staff        38317 Jul 18  2018 IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx
+-rwxrwxr-x     1 sophie  staff          354 May 30  2018 README.rtf
+drwxrwxr-x   763 kevin   staff        25942 Jan 22  2019 RowlandMetaG
+drwxr-xr-x     2 sophie  staff           68 Oct 22 13:56 RowlandNS44_part1
+drwxr-xr-x     2 sophie  staff           68 Oct 22 13:56 RowlandNS44_part2
+drwxr-xr-x     2 sophie  staff           68 Oct 22 13:56 RowlandNS44_part3
+drwxr-xr-x     2 sophie  staff           68 Oct 22 13:56 RowlandNS44_part4
+drwxr-xr-x     2 sophie  staff           68 Oct 22 13:56 RowlandNS44_part5
+drwxr-xr-x     2 sophie  staff           68 Oct 22 13:56 RowlandNS44_part6
+drwxrwxr-x     2 sophie  staff           68 Jun  4  2019 RowlandRunNS38_part1
+drwxrwxr-x     2 sophie  staff           68 Jun  4  2019 RowlandRunNS38_part2
+drwxrwxr-x     2 sophie  staff           68 Jun  4  2019 RowlandRunNS38_part3
+drwxrwxr-x     2 sophie  staff           68 Jun  4  2019 RowlandRunNS38_part4
+drwxrwxr-x     2 sophie  staff           68 Jun  4  2019 RowlandRunNS38_part5
+drwxrwxr-x     2 sophie  staff           68 Jun  4  2019 RowlandRunNS38_part6
+drwxrwxr-x     2 sophie  staff           68 Jun  4  2019 RowlandRunNS39-remainder
+drwxr-xr-x     2 sophie  staff           68 Sep 10 12:03 RowlandRunNS42_part1
+drwxr-xr-x     2 sophie  staff           68 Sep 10 12:03 RowlandRunNS42_part2
+drwxr-xr-x     2 sophie  staff           68 Sep 10 12:03 RowlandRunNS42_part3
+drwxr-xr-x     2 sophie  staff           68 Sep 10 12:03 RowlandRunNS42_part4
+drwxr-xr-x     2 sophie  staff           68 Sep 10 12:03 RowlandRunNS42_part5
+drwxr-xr-x     2 sophie  staff           68 Sep 10 12:03 RowlandRunNS42_part6
+drwxr-xr-x     2 sophie  staff           68 Sep 18 17:57 RowlandRunNS43_part1
+drwxr-xr-x     2 sophie  staff           68 Sep 18 17:57 RowlandRunNS43_part2
+drwxr-xr-x     2 sophie  staff           68 Sep 18 17:57 RowlandRunNS43_part3
+drwxr-xr-x     2 sophie  staff           68 Sep 18 17:58 RowlandRunNS43_part4
+drwxr-xr-x     2 sophie  staff           68 Sep 18 17:58 RowlandRunNS43_part5
+drwxr-xr-x     2 sophie  staff           68 Sep 18 17:58 RowlandRunNS43_part6
+-rwxrwxr-x     1 kevin   staff  75492823670 Jan 21  2019 apr2018.zip
+-rw-r--r--     1 sophie  staff  14698942886 Sep  9 13:57 aug2019_1.zip
+-rw-r--r--     1 sophie  staff  15517466965 Sep  9 14:17 aug2019_2.zip
+-rw-r--r--     1 sophie  staff  17692116315 Sep  9 14:06 aug2019_3.zip
+-rw-r--r--     1 sophie  staff  14474183863 Sep  9 14:03 aug2019_4.zip
+-rw-r--r--     1 sophie  staff  16998573493 Sep  9 14:13 aug2019_5.zip
+-rw-r--r--     1 sophie  staff  15055872754 Sep  9 14:18 aug2019_6.zip
+-rwxrwxr-x     1 kevin   staff        23608 Apr 20  2019 batch001_files.txt
+-rwxrwxr-x     1 kevin   staff        28048 Apr 20  2019 batch002_files.txt
+-rwxrwxr-x     1 kevin   staff        22424 Apr 20  2019 batch003_files.txt
+-rwxrwxr-x     1 kevin   staff        17992 Apr 23  2019 batch004_files.txt
+-rwxrwxr-x     1 kevin   staff        28344 Apr 18  2019 batch005_files.txt
+-rwxrwxr-x     1 kevin   staff        19464 Jan 19  2019 batch006_files.txt
+-rwxrwxr-x     1 sophie  staff        19168 Mar 12  2019 batch007_files.txt
+-rwxrwxr-x     1 sophie  staff        28344 Apr  5  2019 batch008_files.txt
+-rwxrwxr-x     1 sophie  staff        38336 Jun  4  2019 batch009_files.txt
+drwxr-xr-x    15 kevin   staff          510 Aug 30 16:07 batch010
+-rw-r--r--     1 sophie  staff        28344 Sep 10 09:32 batch010_files.txt
+-rw-r--r--     1 sophie  staff        28344 Sep 18 17:11 batch011_files.txt
+-rw-r--r--     1 sophie  staff        28352 Oct 22 10:51 batch012_files.txt
+-rwxrwxr-x     1 sophie  staff  25085043521 Mar 12  2019 dec2018_1.zip
+-rwxrwxr-x     1 sophie  staff  23871427138 Mar 12  2019 dec2018_2.zip
+-rwxrwxr-x     1 sophie  staff  24985890515 Mar 12  2019 dec2018_3.zip
+drwxrwxr-x    73 kevin   staff         2482 Oct 22 12:40 details
+-rwxrwxr-x     1 sophie  staff  12818025980 Apr  4  2019 feb2019_1.zip
+-rwxrwxr-x     1 sophie  staff  13020378264 Apr  4  2019 feb2019_2.zip
+-rwxrwxr-x     1 sophie  staff  15442389636 Apr  4  2019 feb2019_3.zip
+-rwxrwxr-x     1 sophie  staff  15000386980 Apr  4  2019 feb2019_4.zip
+-rwxrwxr-x     1 sophie  staff  13670082991 Apr  4  2019 feb2019_5.zip
+-rwxrwxr-x     1 sophie  staff  14591216832 Apr  4  2019 feb2019_6.zip
+-rwxrwxr-x     1 sophie  staff  14609065300 Jun  4  2019 may2019_1.zip
+-rwxrwxr-x     1 sophie  staff  12369427841 Jun  4  2019 may2019_2.zip
+-rwxrwxr-x     1 sophie  staff  14144220803 Jun  4  2019 may2019_3.zip
+-rwxrwxr-x     1 sophie  staff  15537372869 Jun  4  2019 may2019_4.zip
+-rwxrwxr-x     1 sophie  staff  13055782071 Jun  4  2019 may2019_5.zip
+-rwxrwxr-x     1 sophie  staff  13340576337 Jun  4  2019 may2019_6.zip
+-rwxrwxr-x     1 sophie  staff  35844182939 Jun  4  2019 may2019_7.zip
+-rwxrwxr-x     1 kevin   staff          296 Apr 23  2019 missing.txt
+-rwxrwxr-x     1 kevin   staff         1184 Apr 23  2019 nobatch.txt
+-rwxrwxr-x     1 kevin   staff  77388259227 Jan 18  2019 nov2018.zip
+-rw-r--r--     1 sophie  staff  12620011783 Oct 21 14:48 oct2019_1.zip
+-rw-r--r--     1 sophie  staff  13081509700 Oct 21 14:55 oct2019_2.zip
+-rw-r--r--     1 sophie  staff  11247767313 Oct 21 14:56 oct2019_3.zip
+-rw-r--r--     1 sophie  staff  12018232158 Oct 21 14:57 oct2019_4.zip
+-rw-r--r--     1 sophie  staff  12199788900 Oct 21 14:57 oct2019_5.zip
+-rw-r--r--     1 sophie  staff  13383668214 Oct 21 14:57 oct2019_6.zip
+-rw-r--r--     1 sophie  staff         4696 Sep 10 11:58 p1.txt
+drwxrwxr-x  8450 kevin   staff       287300 Oct 22 13:56 rawfastq
+-rwxrwxr-x     1 kevin   staff        68280 Jan 28  2019 rawfastq_batch005.txt
+-rw-r--r--     1 sophie  staff  13950521134 Sep 18 11:23 sep2019_1.zip
+-rw-r--r--     1 sophie  staff  11916437699 Sep 18 11:22 sep2019_2.zip
+-rw-r--r--     1 sophie  staff  13319331835 Sep 18 11:28 sep2019_3.zip
+-rw-r--r--     1 sophie  staff  12688859783 Sep 18 11:25 sep2019_4.zip
+-rw-r--r--     1 sophie  staff  12913826643 Sep 18 11:25 sep2019_5.zip
+-rw-r--r--     1 sophie  staff  13929224254 Sep 18 11:26 sep2019_6.zip
+drwx------    12 sophie  staff          408 Aug 28 12:27 submissions
+-rwxrwxr-x     1 sophie  staff          165 Jul 27  2018 ~$IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx
+$ ls -l sequencing/
+total 0
+drwx------  21 sophie  staff   714 Jul 18 11:24 16S
+drwxrwxr-x  92 sophie  staff  3128 Oct 22 10:49 mgx
+# /Volumes/vkclab/echo/
+$ ls -l sequencing/
+total 92063840
+drwx------  1 sophie  staff        16384 Jul 18 11:24 16S
+drwx------  1 sophie  staff        16384 Oct 22 10:49 mgx
+drwx------  1 sophie  staff        16384 Jan 28  2019 mgx_old
+-rwx------  1 sophie  staff  47136636928 Jan 22  2019 mgx_old.tar.gz
+$ ls -l sequencing/mgx
+total 1324168672
+-rwx------  1 sophie  staff         5865 Jul 26  2018 ECHO_May2018_mapping.txt
+-rwx------  1 sophie  staff        16306 Jul 26  2018 ECHO_May2018_mapping.xlsx
+-rwx------  1 sophie  staff       261114 Jul 18  2018 February 2018 Illumina & Metagenome Sequencing.xlsx
+-rwx------  1 sophie  staff        35359 Jul 18  2018 IMR-SampleSubmissionSheet_v8(Rowland_Feb20).xlsx
+-rwx------  1 sophie  staff        38317 Jul 18  2018 IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx
+-rwx------  1 sophie  staff          354 May 30  2018 README.rtf
+drwx------  1 sophie  staff        16384 Jan 22  2019 RowlandMetaG
+drwx------  1 sophie  staff        16384 Oct 22 13:56 RowlandNS44_part1
+drwx------  1 sophie  staff        16384 Oct 22 13:56 RowlandNS44_part2
+drwx------  1 sophie  staff        16384 Oct 22 13:56 RowlandNS44_part3
+drwx------  1 sophie  staff        16384 Oct 22 13:56 RowlandNS44_part4
+drwx------  1 sophie  staff        16384 Oct 22 13:56 RowlandNS44_part5
+drwx------  1 sophie  staff        16384 Oct 22 13:56 RowlandNS44_part6
+drwx------  1 sophie  staff        16384 Jun  4  2019 RowlandRunNS38_part1
+drwx------  1 sophie  staff        16384 Jun  4  2019 RowlandRunNS38_part2
+drwx------  1 sophie  staff        16384 Jun  4  2019 RowlandRunNS38_part3
+drwx------  1 sophie  staff        16384 Jun  4  2019 RowlandRunNS38_part4
+drwx------  1 sophie  staff        16384 Jun  4  2019 RowlandRunNS38_part5
+drwx------  1 sophie  staff        16384 Jun  4  2019 RowlandRunNS38_part6
+drwx------  1 sophie  staff        16384 Jun  4  2019 RowlandRunNS39-remainder
+drwx------  1 sophie  staff        16384 Sep 10 12:03 RowlandRunNS42_part1
+drwx------  1 sophie  staff        16384 Sep 10 12:03 RowlandRunNS42_part2
+drwx------  1 sophie  staff        16384 Sep 10 12:03 RowlandRunNS42_part3
+drwx------  1 sophie  staff        16384 Sep 10 12:03 RowlandRunNS42_part4
+drwx------  1 sophie  staff        16384 Sep 10 12:03 RowlandRunNS42_part5
+drwx------  1 sophie  staff        16384 Sep 10 12:03 RowlandRunNS42_part6
+drwx------  1 sophie  staff        16384 Sep 18 17:57 RowlandRunNS43_part1
+drwx------  1 sophie  staff        16384 Sep 18 17:57 RowlandRunNS43_part2
+drwx------  1 sophie  staff        16384 Sep 18 17:57 RowlandRunNS43_part3
+drwx------  1 sophie  staff        16384 Sep 18 17:58 RowlandRunNS43_part4
+drwx------  1 sophie  staff        16384 Sep 18 17:58 RowlandRunNS43_part5
+drwx------  1 sophie  staff        16384 Sep 18 17:58 RowlandRunNS43_part6
+-rwx------  1 sophie  staff  75492823670 Jan 21  2019 apr2018.zip
+-rwx------  1 sophie  staff  14698942886 Sep  9 13:57 aug2019_1.zip
+-rwx------  1 sophie  staff  15517466965 Sep  9 14:17 aug2019_2.zip
+-rwx------  1 sophie  staff  17692116315 Sep  9 14:06 aug2019_3.zip
+-rwx------  1 sophie  staff  14474183863 Sep  9 14:03 aug2019_4.zip
+-rwx------  1 sophie  staff  16998573493 Sep  9 14:13 aug2019_5.zip
+-rwx------  1 sophie  staff  15055872754 Sep  9 14:18 aug2019_6.zip
+-rwx------  1 sophie  staff        23608 Apr 20  2019 batch001_files.txt
+-rwx------  1 sophie  staff       119632 Jan 22  2019 batch002-3_files.txt
+-rwx------  1 sophie  staff        28048 Apr 20  2019 batch002_files.txt
+-rwx------  1 sophie  staff        22424 Apr 20  2019 batch003_files.txt
+-rwx------  1 sophie  staff        17992 Apr 23  2019 batch004_files.txt
+-rwx------  1 sophie  staff         1249 Jan 28  2019 batch005_airtable.txt
+-rwx------  1 sophie  staff         1250 Jan 28  2019 batch005_airtable_fix.txt
+-rwx------  1 sophie  staff        28344 Apr 18  2019 batch005_files.txt
+-rwx------  1 sophie  staff        19464 Jan 19  2019 batch006_files.txt
+-rwx------  1 sophie  staff        19168 Mar 12  2019 batch007_files.txt
+-rwx------  1 sophie  staff        28344 Apr  5  2019 batch008_files.txt
+-rwx------  1 sophie  staff        38336 Jun  4  2019 batch009_files.txt
+drwx------  1 sophie  staff        16384 Aug 30 16:07 batch010
+-rwx------  1 sophie  staff        28344 Sep 10 09:32 batch010_files.txt
+-rwx------  1 sophie  staff        28344 Sep 18 17:11 batch011_files.txt
+-rwx------  1 sophie  staff        28352 Oct 22 10:51 batch012_files.txt
+-rwx------  1 sophie  staff  25085043521 Mar 12  2019 dec2018_1.zip
+-rwx------  1 sophie  staff  23871427138 Mar 12  2019 dec2018_2.zip
+-rwx------  1 sophie  staff  24985890515 Mar 12  2019 dec2018_3.zip
+drwx------  1 sophie  staff        16384 Oct 22 12:40 details
+-rwx------  1 sophie  staff  12818025980 Apr  4  2019 feb2019_1.zip
+-rwx------  1 sophie  staff  13020378264 Apr  4  2019 feb2019_2.zip
+-rwx------  1 sophie  staff  15442389636 Apr  4  2019 feb2019_3.zip
+-rwx------  1 sophie  staff  15000386980 Apr  4  2019 feb2019_4.zip
+-rwx------  1 sophie  staff  13670082991 Apr  4  2019 feb2019_5.zip
+-rwx------  1 sophie  staff  14591216832 Apr  4  2019 feb2019_6.zip
+-rwx------  1 sophie  staff  14609065300 Jun  4  2019 may2019_1.zip
+-rwx------  1 sophie  staff  12369427841 Jun  4  2019 may2019_2.zip
+-rwx------  1 sophie  staff  14144220803 Jun  4  2019 may2019_3.zip
+-rwx------  1 sophie  staff  15537372869 Jun  4  2019 may2019_4.zip
+-rwx------  1 sophie  staff  13055782071 Jun  4  2019 may2019_5.zip
+-rwx------  1 sophie  staff  13340576337 Jun  4  2019 may2019_6.zip
+-rwx------  1 sophie  staff  35844182939 Jun  4  2019 may2019_7.zip
+-rwx------  1 sophie  staff          296 Apr 23  2019 missing.txt
+-rwx------  1 sophie  staff         1184 Apr 23  2019 nobatch.txt
+-rwx------  1 sophie  staff  77388259227 Jan 18  2019 nov2018.zip
+-rwx------  1 sophie  staff  12620011783 Oct 21 14:48 oct2019_1.zip
+-rwx------  1 sophie  staff  13081509700 Oct 21 14:55 oct2019_2.zip
+-rwx------  1 sophie  staff  11247767313 Oct 21 14:56 oct2019_3.zip
+-rwx------  1 sophie  staff  12018232158 Oct 21 14:57 oct2019_4.zip
+-rwx------  1 sophie  staff  12199788900 Oct 21 14:57 oct2019_5.zip
+-rwx------  1 sophie  staff  13383668214 Oct 21 14:57 oct2019_6.zip
+-rwx------  1 sophie  staff         4696 Sep 10 11:58 p1.txt
+drwx------  1 sophie  staff        16384 Oct 22 13:56 rawfastq
+-rwx------  1 sophie  staff        68280 Jan 28  2019 rawfastq_batch005.txt
+-rwx------  1 sophie  staff  13950521134 Sep 18 11:23 sep2019_1.zip
+-rwx------  1 sophie  staff  11916437699 Sep 18 11:22 sep2019_2.zip
+-rwx------  1 sophie  staff  13319331835 Sep 18 11:28 sep2019_3.zip
+-rwx------  1 sophie  staff  12688859783 Sep 18 11:25 sep2019_4.zip
+-rwx------  1 sophie  staff  12913826643 Sep 18 11:25 sep2019_5.zip
+-rwx------  1 sophie  staff  13929224254 Sep 18 11:26 sep2019_6.zip
+drwx------  1 sophie  staff        16384 Aug 28 12:27 submissions
+-rwx------  1 sophie  staff          165 Jul 27  2018 ~$IMR-SampleSubmissionSheet_v8(Rowland_May17).xlsx
+```
+
 ## Cleaning /lovelace/echo/sequencing/mgx/
 
 ```sh
