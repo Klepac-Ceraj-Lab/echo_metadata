@@ -83,7 +83,23 @@ $ rsync -avzP ada:/lovelace/echo/sequencing/oral_mgx /Volumes/franklin/echo/sequ
 
 # Copy /sequencing/mgx
 $ rsync -avzP ada:/lovelace/echo/sequencing/mgx /Volumes/vkclab/echo/sequencing/mgx --delete
-$ rsync -avzPn ada:/lovelace/echo/sequencing/mgx /Volumes/franklin/echo/sequencing/mgx --delete
+$ rsync -avzP ada:/lovelace/echo/sequencing/mgx /Volumes/franklin/echo/sequencing/mgx --delete
+```
+* -a -rlptgoD
+* -r recursive
+* -l links
+* -p perms, preserve permissions
+* -t times, preserve mod times
+* -g group, preserve group
+* -o owner, preserve owner
+* -D devices, preserve device files
+
+Not working possibly because of errors from transferring between a Linux system and a non-Linux system.
+
+Trying a command to just delete unwanted files.
+
+```sh
+$ rsync -rvzPn --delete --existing --ignore-existing --ignore-errors ada:/lovelace/echo/sequencing/mgx /Volumes/vkclab/echo/sequencing/mgx
 ```
 
 ```sh
