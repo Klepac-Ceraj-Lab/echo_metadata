@@ -849,3 +849,5 @@ $ mv ECHO_May2018_mapping.txt /lovelace/echo/attic/sequencing/
 ```
 
 ## Rsyncing from `lovelace` to `franklin` and `ntm`
+
+Ran into difficulties and eventually manually removed extraneous files from `franklin` and `ntm` and then rsync'd across one final time. (As of Jan 6, 2020)
