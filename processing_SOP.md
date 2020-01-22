@@ -69,6 +69,27 @@ in AirTable.
 
 Use the `Inputting new samples` view to add new sample information into AirTable.
 
+### Checking for duplicates
+
+Before making labels and further processing samples, check to make sure all samples have a unique `SampleID`. This can be done using AirTable.
+
+1. Open Airtable and toggle on `Blocks`
+
+![Toggle Blocks](airtable_blocks.png)
+
+2. From the dropdown menu, select the `Corrections` dashboard.
+
+![Dashboard selection](correctionsblock.png)
+
+3. Open the `Duplicate SampleIDs` block.
+
+![Duplicate records block](duplicatesblock.png)
+
+4. If there are any duplicates, email the RI group to confirm if all information, particularly `TimePoint`, is correct. If there is incorrect information, correct the relevant fields for that sample. If all information is correct, change the `CollectionRep` appropriately for any duplicate samples.
+
+
+*Note*: If you do not correct duplicates prior to processing samples, make note of any changes in the `Notes` column so any discretions between labels or lab notebooks or filenames can be traced and clarified.
+
 ### Aliquoting fecal samples
 
 All fecal samples (OMNIgene Gut tubes) should be aliquoted as these collection
@@ -404,7 +425,7 @@ YYYYMMDD_identifiable.fmp12
 
 1. Export `Master-Everything.csv` from AirTable.
 
-![export csv](exportcsv.png)
+![Export csv](exportcsv.png)
 
 2. Move `Master-Everything.csv` into gitrepos/echo_metadata/
 ```sh
