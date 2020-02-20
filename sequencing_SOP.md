@@ -265,3 +265,14 @@ $ rsync -avzP /Volumes/G-DRIVE\ USB-C/ECHO/sequencing/16S/RowlandMetaG/details/b
 $ rsync -avzP /Volumes/G-DRIVE\ USB-C/ECHO/sequencing/16S/RowlandMetaG/batch00#_all_files.txt IMR_MMMYYYY_mgx/
 $ rsync -avzP /Volumes/G-DRIVE\ USB-C/ECHO/sequencing/16S/RowlandMetaG/details/batch00#_all.md5 IMR_MMMYYYY_mgx/
 ```
+
+## Renaming files
+
+If a file was assigned the incorrect `SampleID` when sent for sequencing, it is best to rename the file during documenting the sequencing files before rsyncing across drives.
+
+```sh
+$ for f in $(find RowlandMetaG_*/*.gz | grep 0604); do
+    # this syntax says 'use variable f, but replace "0604" with "2018"'
+    mv -v $f ${f/0604/2018};
+  done
+```
