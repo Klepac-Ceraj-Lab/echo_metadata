@@ -1,0 +1,7 @@
+- [ ] Lab system and unix admin SOP
+  - [ ] Lab computers, locations, and drives
+  - [ ] adding / deleting users
+  - [ ] setting up SSH access
+  - [ ] setting quotas
+  - [ ] installing programs
+- [ ] Engaging admin SOP

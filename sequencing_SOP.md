@@ -33,8 +33,11 @@ terminal app. Start a new `tmux` session in your terminal window.
 
 ```sh
 $ tmux new -s seq
-# seq = [name of session]
-# Re-attach to tmux session
+```
+
+Or, if the tmux session already exists, reattach:
+
+```
 $ tmux a -t seq
 ```
 
@@ -42,14 +45,13 @@ Change the directory to the echo sequencing folder.
 
 ```sh
 $ cd /Volumes/franklin/echo/sequencing/
-$ cd mgx
-# (or 16S)
+$ cd mgx # or 16S
 ```
 
 To download, use the `curl` program.
 Replace the url below with the one provided by the sequencing facility.
 
-NOTE: The file name below is just an example -
+**NOTE**: The file name below is just an example -
 use something more specific to prevent overwriting previous sequences.
 For batches split into multiple dropbox links, add `_#` to the file name,
 as shown below.
@@ -119,7 +121,7 @@ Once this is finished, check to make sure that all of the files were extracted.
 The result of `ls -l RowlandMetaG` (or whatever folder they were extracted into),
 especially at the end, should match the content of the `_details.txt` file.
 
-_Note: folder names can be determined from the original dropbox link_
+**Note**: folder names can be determined from the original dropbox link
 
 for example
 
@@ -211,8 +213,6 @@ $ mv -nv RowlandMetaG/* rawfastq/
 ## Rsync files to lovelace and ntm
 
 Assuming the lab drive on NTM is mounted and can ssh into `ada` from `rosalind`.
-
-_Note: Run this in a tmux window_
 
 ```
 # From rosalind, franklin to lovelace
